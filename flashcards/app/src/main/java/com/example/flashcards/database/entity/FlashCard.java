@@ -11,10 +11,26 @@ public class FlashCard {
     private String word;
     private String value;
 
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     public FlashCard(String word, String value) {
         this.word = word;
         this.value = value;
     }
-    
-    
+
+
 }
