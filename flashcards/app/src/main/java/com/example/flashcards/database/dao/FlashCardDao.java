@@ -21,10 +21,10 @@ public interface FlashCardDao {
     FlashCard getById(long id);
 
     @Insert(onConflict = REPLACE)
-    void insertFlashCard(FlashCard card, int REPLACE);
+    void insertFlashCard(FlashCard card);
 
     @Delete
-    void deleteFlashCard(long id);
+    void deleteFlashCard(FlashCard card);
 
     @Update
     void updateFlashCard(FlashCard card);

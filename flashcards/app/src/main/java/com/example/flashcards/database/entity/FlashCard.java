@@ -1,6 +1,5 @@
 package com.example.flashcards.database.entity;
 
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,6 +9,14 @@ public class FlashCard {
     private long id;
     private String word;
     private String value;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getWord() {
         return word;
