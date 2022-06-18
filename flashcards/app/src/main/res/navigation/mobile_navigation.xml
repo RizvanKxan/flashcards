@@ -22,4 +22,12 @@
         android:name="com.example.flashcards.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+<<<<<<< HEAD
+=======
+    <fragment
+        android:id="@+id/nav_cards"
+        android:name="com.example.flashcards.ui.cards.CardsFragment"
+        android:label="@string/menu_cards"
+        tools:layout="@layout/fragment_card_list" />
+>>>>>>> origin/main
 </navigation>
