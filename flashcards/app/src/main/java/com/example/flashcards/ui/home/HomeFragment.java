@@ -1,31 +1,30 @@
 package com.example.flashcards.ui.home;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 
-import com.example.flashcards.MainActivity;
-import com.example.flashcards.R;
 import com.example.flashcards.databinding.FragmentHomeBinding;
-import com.example.flashcards.ui.cards.CardsFragment;
-import com.example.flashcards.ui.cards.DialogCreateCard;
+import com.example.flashcards.ui.cards.CreateCardDialog;
 
 public class HomeFragment extends Fragment {
 
+    private static final int REQUEST_DATE = 0;
     private FragmentHomeBinding binding;
-    DialogFragment addCard;
+    CreateCardDialog mDialog;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,8 +41,8 @@ public class HomeFragment extends Fragment {
         btnCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addCard = new DialogCreateCard();
-                addCard.show(getFragmentManager(),"tag");
+                mDialog = CreateCardDialog.newInstance();
+                mDialog.show(getActivity().getSupportFragmentManager(),"tag");
             }
         });
         return root;

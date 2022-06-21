@@ -12,4 +12,13 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="home_btn_cards_text">Добавить карточку</string>
     <string name="menu_cards">Карточки</string>
+    <string name="create_card_tv_word">Введите термин или вопрос.</string>
+    <string name="btn_add">Добавить</string>
+    <string name="btn_cancel">Отмена</string>
+    <string name="create_card_et_word_hint">Введите термин или вопрос…</string>
+    <string name="create_card_et_value_hint">Введите значение или ответ…</string>
+    <string name="attention">Внимание!</string>
+    <string name="msgErrorCreateCard">Поля должны быть заполнены.</string>
+    <string name="accept">Принято</string>
+    <string name="addCardSuccess">Карточка успешно добавлена!</string>
 </resources>

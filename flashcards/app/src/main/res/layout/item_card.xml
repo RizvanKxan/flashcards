@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:cardCornerRadius="300dp"
+    app:cardBackgroundColor="#84FFFF"
+    tools:layout_editor_absoluteX="1dp">
 
-    <androidx.cardview.widget.CardView
+    <TextView
+        android:id="@+id/item_card_tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp" >
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/item_card_tv_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Textxtxtxt"
-            android:textSize="30sp"
-            android:background="@color/yellow"
-            android:textAlignment="center"/>
-
-
-
-
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
