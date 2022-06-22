@@ -21,8 +21,6 @@ import com.example.flashcards.databinding.FragmentHomeBinding;
 import com.example.flashcards.ui.cards.CreateCardDialog;
 
 public class HomeFragment extends Fragment {
-
-    private static final int REQUEST_DATE = 0;
     private FragmentHomeBinding binding;
     CreateCardDialog mDialog;
 
