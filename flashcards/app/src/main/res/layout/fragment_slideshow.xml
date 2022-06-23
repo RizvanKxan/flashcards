@@ -17,10 +17,15 @@
         android:id="@+id/bottom_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="100dp"
-        android:background="@color/black"
+        android:layout_margin="200dp"
         android:text="" >
-
+        <Button
+            android:id="@+id/btnText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:text="open"
+            android:textSize="40sp"/>
 
 
     </FrameLayout>
@@ -30,8 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="100dp"
-        android:background="@color/black"
-        android:text="" >
+        android:background="@color/purple_200"
+        android:text="">
         <TextView
             android:id="@+id/tvText"
             android:layout_width="wrap_content"
@@ -50,16 +55,14 @@
 
     <ImageView
         android:id="@+id/likeIcon"
-        android:src="@drawable/side_nav_bar"
-        android:background="@drawable/ic_menu_camera"
+        android:background="@drawable/check"
         android:layout_height="0dp"
         android:layout_width="0dp"
         app:tint="#fbc02d" />
 
     <ImageView
         android:id="@+id/passIcon"
-        android:src="@drawable/ic_launcher_foreground"
-        android:background="@drawable/ic_menu_camera"
+        android:background="@drawable/cancel"
         android:layout_height="0dp"
         android:layout_width="0dp"
         app:tint="#e64a19" />

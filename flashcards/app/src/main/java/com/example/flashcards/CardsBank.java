@@ -7,6 +7,7 @@ import com.example.flashcards.database.dao.FlashCardDao;
 import com.example.flashcards.database.entity.FlashCard;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -29,6 +30,16 @@ public class CardsBank {
         return sBank;
     }
 
+    public void getCard(Result<FlashCard> listener, long id) {
+        executorService.execute(() -> {
+            try {
+                FlashCard card = cardsDao.getById(id);
+                listener.onSuccess(card);
+            } catch (Exception exception) {
+                listener.onError(exception);
+            }
+        });
+    }
     public void getCards(Result<List<FlashCard>> listener) {
         executorService.execute(() -> {
             try {

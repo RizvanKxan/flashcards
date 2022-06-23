@@ -44,7 +44,9 @@ public class SlideshowViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
-
+    public boolean getInt() {
+        return i%2==0;
+    }
     public void swipe() {
         i = i + 1;
         if(i<mCards.getValue().size()) {

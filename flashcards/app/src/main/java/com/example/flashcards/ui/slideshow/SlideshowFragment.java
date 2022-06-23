@@ -32,44 +32,32 @@ public class SlideshowFragment extends Fragment {
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         FrameLayout fr = binding.topCard;
+        fr.setBackgroundColor(Color.CYAN);
+        FrameLayout fr2 = binding.bottomCard;
+        fr2.setBackgroundColor(Color.CYAN);
         final TextView tv = binding.tvText;
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), tv::setText);
-
-//        fr.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                slideshowViewModel.getValue();
-//            }
-//        });
-//        fr.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                slideshowViewModel.getValue();
-//                return false;
-//            }
-//        });
-
         MotionLayout motion = binding.motionLayout;
         motion.setTransitionListener(new TransitionAdapter() {
             @Override
             public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {
                 super.onTransitionCompleted(motionLayout, currentId);
 
+
                 if(currentId == R.id.offScreenPass || currentId == R.id.offScreenLike) {
-                    motionLayout.setProgress(0);
-                    motionLayout.setTransition(R.id.start, R.id.like);
+//                    motionLayout.setTransition(R.id.start, R.id.like);
                     slideshowViewModel.swipe();
+                    if(slideshowViewModel.getInt()) {
+                        fr.setBackgroundColor(Color.CYAN);
+                        fr2.setBackgroundColor(Color.GREEN);
+                    } else
+                    {
+                        fr.setBackgroundColor(Color.GREEN);
+                        fr2.setBackgroundColor(Color.CYAN);
+                    }
                 }
             }
         });
-
-//        motion.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                slideshowViewModel.getValue();
-//                return false;
-//            }
-//        });
 
         Button btn = binding.btnText;
         btn.setOnClickListener(new View.OnClickListener() {
