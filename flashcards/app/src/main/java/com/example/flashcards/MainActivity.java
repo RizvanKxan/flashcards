@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
+import com.example.flashcards.ui.cards.CardFragment;
+import com.example.flashcards.ui.cards.CardsListFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -19,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.flashcards.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
@@ -65,5 +67,4 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
 }

@@ -2,7 +2,9 @@ package com.example.flashcards.ui.cards;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.flashcards.CardsBank;
+import com.example.flashcards.MainActivity;
 import com.example.flashcards.R;
 import com.example.flashcards.database.entity.FlashCard;
 import com.example.flashcards.databinding.FragmentCardListBinding;
@@ -25,14 +28,14 @@ import com.example.flashcards.databinding.FragmentCardListBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardsListFragment extends Fragment {
+public class CardsListFragment extends Fragment{
+    private static final int REQUEST_DATE = 0;
     private FragmentCardListBinding binding;
     private CardsViewModel mViewModel;
-    private RecyclerView mCardsRecyclerView;
+    public RecyclerView mCardsRecyclerView;
     private CardsAdapter cardsAdapter;
-    //private int mSelectedPosition = -1;
 
-    public static CardsListFragment newInstance() {
+     public static CardsListFragment newInstance() {
         return new CardsListFragment();
     }
 
@@ -40,7 +43,7 @@ public class CardsListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        CardsViewModel galleryViewModel =
+        CardsViewModel cardsViewModel =
                 new ViewModelProvider(this).get(CardsViewModel.class);
 
         View view = inflater.inflate(R.layout.fragment_card_list, container, false);
@@ -65,21 +68,37 @@ public class CardsListFragment extends Fragment {
 
             }
         });
-        cardsAdapter = new CardsAdapter(getActivity(),cards);
+        cardsAdapter = new CardsAdapter(cards);
         mCardsRecyclerView.setAdapter(cardsAdapter);
         cardsAdapter.notifyDataSetChanged();
 
         // TODO: Use the ViewModel
     }
 
+    public void update() {
+        List<FlashCard> cards = new ArrayList<>();
+        CardsBank.get().getCards(new CardsBank.Result<List<FlashCard>>() {
+            @Override
+            public void onSuccess(List<FlashCard> flashCards) {
+                cards.addAll(flashCards);
+            }
+
+            @Override
+            public void onError(Exception exception) {
+
+            }
+        });
+        cardsAdapter = new CardsAdapter(cards);
+        mCardsRecyclerView.setAdapter(cardsAdapter);
+        cardsAdapter.notifyDataSetChanged();
+    }
+
     public class CardsAdapter  extends RecyclerView.Adapter<CardsAdapter.CardsHolder> {
 
         private List<FlashCard> mCards;
         private int selectedPos = -1;
-        private Context context;
 
-        public CardsAdapter(Context context, List<FlashCard> cards) {
-            this.context = context;
+        public CardsAdapter(List<FlashCard> cards) {
             mCards = cards;
         }
 
@@ -135,17 +154,11 @@ public class CardsListFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                // mCard.isActive = true;
                 notifyItemChanged(selectedPos);
                 selectedPos= getLayoutPosition();
                 notifyItemChanged(selectedPos);
                 CardFragment fragment = CardFragment.newInstance(mCard.getId());
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.nav_host_fragment_content_main, fragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
-
-
+                fragment.show(getActivity().getSupportFragmentManager(),"tag");
             }
         }
     }

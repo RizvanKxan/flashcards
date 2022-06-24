@@ -26,5 +26,6 @@
         android:id="@+id/nav_cards"
         android:name="com.example.flashcards.ui.cards.CardsListFragment"
         android:label="@string/menu_cards"
-        tools:layout="@layout/fragment_card_list" />
+        tools:layout="@layout/fragment_card_list" >
+    </fragment>
 </navigation>

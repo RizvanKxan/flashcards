@@ -6,8 +6,6 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "flash_cards")
 public class FlashCard {
-    @Ignore
-    public boolean isActive;
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String word;
@@ -41,5 +39,4 @@ public class FlashCard {
         this.word = word;
         this.value = value;
     }
-
 }

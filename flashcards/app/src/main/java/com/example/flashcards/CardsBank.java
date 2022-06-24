@@ -55,6 +55,10 @@ public class CardsBank {
         executorService.execute(() -> cardsDao.insertFlashCard(card));
     }
 
+    public void updateCard(FlashCard card) {
+        executorService.execute(()-> cardsDao.updateFlashCard(card));
+    }
+
     public interface Result<T> {
         void onSuccess(T t);
 
