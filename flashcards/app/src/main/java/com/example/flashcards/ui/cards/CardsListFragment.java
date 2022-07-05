@@ -29,9 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardsListFragment extends Fragment{
-    private static final int REQUEST_DATE = 0;
     private FragmentCardListBinding binding;
-    private CardsViewModel mViewModel;
+    private CardsViewModel cardsViewModel;
     public RecyclerView mCardsRecyclerView;
     private CardsAdapter cardsAdapter;
 
@@ -49,48 +48,22 @@ public class CardsListFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_card_list, container, false);
         mCardsRecyclerView = (RecyclerView) view.findViewById(R.id.cards_recycler_view);
         mCardsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        List<FlashCard> cards = new ArrayList<>();
+        CardsBank.get().getCards(new CardsBank.Result<List<FlashCard>>() {
+            @Override
+            public void onSuccess(List<FlashCard> flashCards) {
+                cards.addAll(flashCards);
+            }
+
+            @Override
+            public void onError(Exception exception) {
+
+            }
+        });
+        cardsAdapter = new CardsAdapter(cards);
+        mCardsRecyclerView.setAdapter(cardsAdapter);
+        //cardsAdapter.notifyDataSetChanged();
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CardsViewModel.class);
-        List<FlashCard> cards = new ArrayList<>();
-        CardsBank.get().getCards(new CardsBank.Result<List<FlashCard>>() {
-            @Override
-            public void onSuccess(List<FlashCard> flashCards) {
-                cards.addAll(flashCards);
-            }
-
-            @Override
-            public void onError(Exception exception) {
-
-            }
-        });
-        cardsAdapter = new CardsAdapter(cards);
-        mCardsRecyclerView.setAdapter(cardsAdapter);
-        cardsAdapter.notifyDataSetChanged();
-
-        // TODO: Use the ViewModel
-    }
-
-    public void update() {
-        List<FlashCard> cards = new ArrayList<>();
-        CardsBank.get().getCards(new CardsBank.Result<List<FlashCard>>() {
-            @Override
-            public void onSuccess(List<FlashCard> flashCards) {
-                cards.addAll(flashCards);
-            }
-
-            @Override
-            public void onError(Exception exception) {
-
-            }
-        });
-        cardsAdapter = new CardsAdapter(cards);
-        mCardsRecyclerView.setAdapter(cardsAdapter);
-        cardsAdapter.notifyDataSetChanged();
     }
 
     public class CardsAdapter  extends RecyclerView.Adapter<CardsAdapter.CardsHolder> {
@@ -155,7 +128,7 @@ public class CardsListFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 notifyItemChanged(selectedPos);
-                selectedPos= getLayoutPosition();
+                selectedPos = getLayoutPosition();
                 notifyItemChanged(selectedPos);
                 CardFragment fragment = CardFragment.newInstance(mCard.getId());
                 fragment.show(getActivity().getSupportFragmentManager(),"tag");

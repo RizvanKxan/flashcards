@@ -32,9 +32,9 @@ public class SlideshowFragment extends Fragment {
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         FrameLayout fr = binding.topCard;
-        fr.setBackgroundColor(Color.CYAN);
+        //fr.setBackgroundColor(Color.CYAN);
         FrameLayout fr2 = binding.bottomCard;
-        fr2.setBackgroundColor(Color.CYAN);
+        //fr2.setBackgroundColor(Color.CYAN);
         final TextView tv = binding.tvText;
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), tv::setText);
         MotionLayout motion = binding.motionLayout;
@@ -47,14 +47,6 @@ public class SlideshowFragment extends Fragment {
                 if(currentId == R.id.offScreenPass || currentId == R.id.offScreenLike) {
 //                    motionLayout.setTransition(R.id.start, R.id.like);
                     slideshowViewModel.swipe();
-                    if(slideshowViewModel.getInt()) {
-                        fr.setBackgroundColor(Color.CYAN);
-                        fr2.setBackgroundColor(Color.GREEN);
-                    } else
-                    {
-                        fr.setBackgroundColor(Color.GREEN);
-                        fr2.setBackgroundColor(Color.CYAN);
-                    }
                 }
             }
         });
@@ -63,7 +55,11 @@ public class SlideshowFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                slideshowViewModel.getValue();
+                if(slideshowViewModel.isValueShown()) {
+                    slideshowViewModel.getWord();
+                } else {
+                    slideshowViewModel.getValue();
+                }
             }
         });
 

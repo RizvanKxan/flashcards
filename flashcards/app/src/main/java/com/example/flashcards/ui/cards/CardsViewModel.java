@@ -17,7 +17,7 @@ public class CardsViewModel extends ViewModel {
 
     public CardsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("Это фрагмент с карточками.");
         mCards = new MutableLiveData<>();
         List<FlashCard> cards = new ArrayList<>();
         CardsBank.get().getCards(new CardsBank.Result<List<FlashCard>>() {

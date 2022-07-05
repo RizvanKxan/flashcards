@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -26,11 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardFragment extends DialogFragment {
+
     private FlashCard mCard;
     private Button mBtnAdd;
     EditText etW;
     EditText etV;
 
+//ToDo Cтоит отказаться от параметров передаваемых в конструктор фрагмента
     public CardFragment(long id) {
         getCard(id);
     }
@@ -46,15 +49,20 @@ public class CardFragment extends DialogFragment {
 
         View dialogView = LayoutInflater.from(getActivity())
                 .inflate(R.layout.fragment_card, null);
-        etW = dialogView.findViewById(R.id.fragment_card_et_word);
-        etW.setText(mCard.getWord());
-        etV = dialogView.findViewById(R.id.fragment_card_et_value);
-        etV.setText(mCard.getValue());
-        mBtnAdd = dialogView.findViewById(R.id.fragment_card_btn_ok);
-        mBtnAdd.setOnClickListener(this::onClick);
-        Button btnCancel = dialogView.findViewById(R.id.fragment_card_btn_cancel);
-        btnCancel.setOnClickListener(this::onClick);
+
         return dialogView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        etW = view.findViewById(R.id.fragment_card_et_word);
+        etW.setText(mCard.getWord());
+        etV = view.findViewById(R.id.fragment_card_et_value);
+        etV.setText(mCard.getValue());
+        mBtnAdd = view.findViewById(R.id.fragment_card_btn_ok);
+        mBtnAdd.setOnClickListener(this::onClick);
+        Button btnCancel = view.findViewById(R.id.fragment_card_btn_cancel);
+        btnCancel.setOnClickListener(this::onClick);
     }
 
     public void onClick(View v) {

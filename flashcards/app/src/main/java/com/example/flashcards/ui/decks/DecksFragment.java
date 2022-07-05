@@ -1,4 +1,4 @@
-package com.example.flashcards.ui.gallery;
+package com.example.flashcards.ui.decks;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,21 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.flashcards.databinding.FragmentGalleryBinding;
+import com.example.flashcards.databinding.FragmentDecksBinding;
 
-public class GalleryFragment extends Fragment {
+public class DecksFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentDecksBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        DecksViewModel galleryViewModel =
+                new ViewModelProvider(this).get(DecksViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentDecksBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
+        final TextView textView = binding.textDecks;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
