@@ -2,6 +2,7 @@ package com.example.flashcards.database.dao;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -14,8 +15,13 @@ import java.util.List;
 
 @Dao
 public interface FlashCardDao {
+
     @Query("SELECT * FROM flash_cards")
     List<FlashCard> getAll();
+
+    //ToDo переписать в будущем на LiveData
+    @Query("SELECT * FROM flash_cards")
+    LiveData<List<FlashCard>> getAllLiveData();
 
     @Query("SELECT * FROM flash_cards WHERE id = :id")
     FlashCard getById(long id);

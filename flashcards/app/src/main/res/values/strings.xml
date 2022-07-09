@@ -11,6 +11,7 @@
     <string name="menu_decks">Колоды</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="home_btn_cards_text">Добавить карточку</string>
+    <string name="home_btn_add_deck">Добавить колоду</string>
     <string name="menu_cards">Карточки</string>
     <string name="create_card_tv_word">Введите термин или вопрос.</string>
     <string name="btn_add">Добавить</string>

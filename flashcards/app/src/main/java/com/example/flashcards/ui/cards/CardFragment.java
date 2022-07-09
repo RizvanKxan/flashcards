@@ -47,8 +47,7 @@ public class CardFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         getDialog().setTitle("Title!");
 
-        View dialogView = LayoutInflater.from(getActivity())
-                .inflate(R.layout.fragment_card, null);
+        View dialogView = inflater.inflate(R.layout.fragment_card, null);
 
         return dialogView;
     }

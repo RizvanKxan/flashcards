@@ -42,7 +42,7 @@ public class CardsListFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        CardsViewModel cardsViewModel =
+        cardsViewModel =
                 new ViewModelProvider(this).get(CardsViewModel.class);
 
         View view = inflater.inflate(R.layout.fragment_card_list, container, false);

@@ -1,14 +1,20 @@
 package com.example.flashcards.database.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "flash_cards")
 public class FlashCard {
+
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     private long id;
+
+    @ColumnInfo(name = "word")
     private String word;
+
+    @ColumnInfo(name = "value")
     private String value;
 
     public long getId() {
