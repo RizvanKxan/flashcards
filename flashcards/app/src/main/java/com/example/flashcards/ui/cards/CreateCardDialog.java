@@ -1,7 +1,5 @@
 package com.example.flashcards.ui.cards;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
@@ -20,24 +16,17 @@ import com.example.flashcards.CardsBank;
 import com.example.flashcards.R;
 import com.example.flashcards.database.entity.FlashCard;
 
-import java.util.Calendar;
-
 public class CreateCardDialog extends DialogFragment {
 
     private EditText mWordEditText;
     private EditText mValueEditText;
     private Button mBtnAdd;
 
-    public static CreateCardDialog newInstance() {
-        return new CreateCardDialog();
-    }
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getDialog().setTitle("Title!");
 
-        View dialogView = LayoutInflater.from(getActivity())
-                .inflate(R.layout.create_card, null);
+        View dialogView = inflater.inflate(R.layout.fragment_create_card, null);
 
         mBtnAdd = dialogView.findViewById(R.id.btnAdd);
         mBtnAdd.setOnClickListener(this::onClick);

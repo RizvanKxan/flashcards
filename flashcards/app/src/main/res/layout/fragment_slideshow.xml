@@ -8,8 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/motion_layout_scene"
-    tools:showPaths="true"
-    app:motionDebug="SHOW_ALL"
+    tools:showPaths="false"
+    app:motionDebug="NO_DEBUG"
     android:background="#9C27B0"
     tools:context=".ui.slideshow.SlideshowFragment">
 
@@ -20,13 +20,6 @@
         android:layout_margin="200dp"
         android:background="@drawable/gradient"
         android:text="" >
-        <Button
-            android:id="@+id/btnText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:text="open"
-            android:textSize="40sp"/>
 
 
     </FrameLayout>
@@ -35,23 +28,25 @@
         android:id="@+id/top_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="100dp"
         android:background="@drawable/gradient"
         android:text="">
+
         <TextView
             android:id="@+id/tvText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:gravity="center"
             android:text=""
-            android:textSize="40sp"/>
+            android:textSize="20sp"/>
         <Button
             android:id="@+id/btnText"
+            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:text="open"
-            android:textSize="40sp"/>
+            android:text="@string/slideshow_btn"
+            android:textSize="20sp"/>
     </FrameLayout>
 
     <ImageView
@@ -59,13 +54,15 @@
         android:background="@drawable/check"
         android:layout_height="0dp"
         android:layout_width="0dp"
-        app:tint="#fbc02d" />
+        app:tint="#fbc02d"
+        android:contentDescription="like" />
 
     <ImageView
         android:id="@+id/passIcon"
         android:background="@drawable/cancel"
         android:layout_height="0dp"
         android:layout_width="0dp"
-        app:tint="#e64a19" />
+        app:tint="#e64a19"
+        android:contentDescription="pass" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

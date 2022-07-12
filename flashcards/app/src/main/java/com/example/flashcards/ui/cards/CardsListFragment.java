@@ -34,10 +34,6 @@ public class CardsListFragment extends Fragment{
     public RecyclerView mCardsRecyclerView;
     private CardsAdapter cardsAdapter;
 
-     public static CardsListFragment newInstance() {
-        return new CardsListFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
@@ -45,8 +41,10 @@ public class CardsListFragment extends Fragment{
         cardsViewModel =
                 new ViewModelProvider(this).get(CardsViewModel.class);
 
-        View view = inflater.inflate(R.layout.fragment_card_list, container, false);
-        mCardsRecyclerView = (RecyclerView) view.findViewById(R.id.cards_recycler_view);
+        binding = FragmentCardListBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        mCardsRecyclerView = (RecyclerView) binding.cardsRecyclerView;
         mCardsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         List<FlashCard> cards = new ArrayList<>();
         CardsBank.get().getCards(new CardsBank.Result<List<FlashCard>>() {

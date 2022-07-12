@@ -27,7 +27,6 @@ import com.example.flashcards.ui.cards.CreateCardDialog;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
-    CreateCardDialog mDialog;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,22 +39,19 @@ public class HomeFragment extends Fragment {
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        Button btnCards = binding.homeBtnCards;
+        Button btnaddCard = binding.homeBtnCards;
         Button btnAddDeck = binding.homeBtnAddDeck;
-        btnCards.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDialog = CreateCardDialog.newInstance();
-                mDialog.show(getActivity().getSupportFragmentManager(),"tag");
-            }
+
+        btnaddCard.setOnClickListener(view -> {
+            Navigation
+                    .findNavController(view)
+                    .navigate(R.id.action_nav_home_to_nav_create_card);
         });
-//Todo Не совсем правильно работает. ломается навигация обратно.
-        btnAddDeck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.nav_decks);
-            }
-        });
+
+        btnAddDeck.setOnClickListener(view ->
+                Navigation
+                        .findNavController(view)
+                        .navigate(R.id.action_nav_home_to_nav_create_deck));
         return root;
     }
 
