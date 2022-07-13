@@ -39,10 +39,10 @@ public class HomeFragment extends Fragment {
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        Button btnaddCard = binding.homeBtnCards;
+        Button btnAddCard = binding.homeBtnCards;
         Button btnAddDeck = binding.homeBtnAddDeck;
 
-        btnaddCard.setOnClickListener(view -> {
+        btnAddCard.setOnClickListener(view -> {
             Navigation
                     .findNavController(view)
                     .navigate(R.id.action_nav_home_to_nav_create_card);

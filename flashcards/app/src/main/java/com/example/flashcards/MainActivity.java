@@ -63,6 +63,17 @@ public class MainActivity extends AppCompatActivity{
 //        });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        DecksBank.get().saveBank();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        DecksBank.get().saveBank();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

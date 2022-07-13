@@ -14,12 +14,11 @@ import java.util.concurrent.Executors;
 public class CardsBank {
     private static CardsBank sBank;
     private final FlashCardDao cardsDao;
-    private final AppDatabase db;
     private final ExecutorService executorService;
 
     private CardsBank(ExecutorService executorService){
         this.executorService = executorService;
-        db = App.getInstance().getDatabase();
+        AppDatabase db = App.getInstance().getDatabase();
         cardsDao = db.flashCardDao();
     }
 

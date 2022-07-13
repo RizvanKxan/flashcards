@@ -1,10 +1,28 @@
 package com.example.flashcards.database.entity;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "deck")
+@Entity(tableName = "deck", foreignKeys = {
+        @ForeignKey(
+                entity = Decks.class,
+                parentColumns = "id",
+                childColumns = "deck_ID",
+                onDelete = CASCADE,
+                onUpdate = CASCADE
+        ),
+        @ForeignKey(
+                entity = FlashCard.class,
+                parentColumns = "id",
+                childColumns = "card_ID",
+                onDelete = CASCADE,
+                onUpdate = CASCADE
+        )
+})
 public class Deck {
 
     @PrimaryKey(autoGenerate = true)
