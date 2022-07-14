@@ -12,6 +12,7 @@ import androidx.room.Update;
 import com.example.flashcards.database.entity.FlashCard;
 
 import java.util.List;
+import java.util.UUID;
 
 @Dao
 public interface FlashCardDao {
@@ -24,7 +25,7 @@ public interface FlashCardDao {
     LiveData<List<FlashCard>> getAllLiveData();
 
     @Query("SELECT * FROM flash_cards WHERE id = :id")
-    FlashCard getById(long id);
+    FlashCard getById(UUID id);
 
     @Insert(onConflict = REPLACE)
     void insertFlashCard(FlashCard card);

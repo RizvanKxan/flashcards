@@ -29,7 +29,7 @@ public class CardsBank {
         return sBank;
     }
 
-    public void getCard(Result<FlashCard> listener, long id) {
+    public void getCard(Result<FlashCard> listener, UUID id) {
         executorService.execute(() -> {
             try {
                 FlashCard card = cardsDao.getById(id);

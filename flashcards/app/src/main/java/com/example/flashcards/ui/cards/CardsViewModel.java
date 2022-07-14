@@ -1,6 +1,5 @@
 package com.example.flashcards.ui.cards;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 

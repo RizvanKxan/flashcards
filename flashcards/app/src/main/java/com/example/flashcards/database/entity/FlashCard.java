@@ -1,15 +1,19 @@
 package com.example.flashcards.database.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.UUID;
+
 @Entity(tableName = "flash_cards")
 public class FlashCard {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
+    @NonNull
     @ColumnInfo(name = "id")
-    private long id;
+    private UUID id = UUID.randomUUID();
 
     @ColumnInfo(name = "word")
     private String word;
@@ -17,11 +21,12 @@ public class FlashCard {
     @ColumnInfo(name = "value")
     private String value;
 
-    public long getId() {
+    @NonNull
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(@NonNull UUID id) {
         this.id = id;
     }
 

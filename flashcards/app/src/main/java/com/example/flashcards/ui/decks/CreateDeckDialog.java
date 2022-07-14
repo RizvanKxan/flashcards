@@ -25,8 +25,6 @@ public class CreateDeckDialog extends DialogFragment {
     private FragmentCreateDeckBinding binding;
 
     private EditText nameDeckEditText;
-    private Button btnAdd;
-    private Button btnCancel;
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
@@ -36,41 +34,43 @@ public class CreateDeckDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentCreateDeckBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
 
+        binding = FragmentCreateDeckBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         nameDeckEditText = binding.createDeckEtName;
-        btnAdd = binding.btnAdd;
+        Button btnAdd = binding.btnAdd;
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String nameDeck = nameDeckEditText.getText().toString();
                 if(nameDeck.trim().length() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Внимание!")
-                            .setMessage("Поля должны быть заполнены.")
-                            .setPositiveButton("Принято", null)
+                    builder.setTitle(R.string.attention)
+                            .setMessage(R.string.msgErrorCreateCard)
+                            .setPositiveButton(R.string.accept, null)
                             .create()
                             .show();
                 } else {
                     Decks decks = new Decks(nameDeck);
-                    DecksBank.get().addDeck(decks);
-                    Toast msg = Toast.makeText(getActivity(), "Колода успешно добавлена!", Toast.LENGTH_SHORT);
+                    DecksBank.get().addDecks(decks);
+                    Toast msg = Toast.makeText(getActivity(), R.string.addDeckSuccess, Toast.LENGTH_SHORT);
                     msg.show();
                     dismiss();
                 }
             }
         });
-        btnCancel = binding.btnCancel;
+
+        Button btnCancel = binding.btnCancel;
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
             }
         });
-
-        return view;
-
-
     }
 }

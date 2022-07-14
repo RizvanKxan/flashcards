@@ -2,10 +2,13 @@ package com.example.flashcards.database.entity;
 
 import static androidx.room.ForeignKey.CASCADE;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import java.util.UUID;
 
 @Entity(tableName = "deck", foreignKeys = {
         @ForeignKey(
@@ -25,46 +28,48 @@ import androidx.room.PrimaryKey;
 })
 public class Deck {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
+    @NonNull
     @ColumnInfo(name = "id")
-    private long id;
+    private UUID id = UUID.randomUUID();
 
     @ColumnInfo(name = "deck_ID")
-    private long deckID;
+    private UUID deckID;
 
     @ColumnInfo(name = "card_ID")
-    private long cardID;
+    private UUID cardID;
 
     public Deck() {
 
     }
 
-    public Deck(long deckID, long cardID) {
+    public Deck(UUID deckID, UUID cardID) {
         this.deckID = deckID;
         this.cardID = cardID;
     }
 
-    public long getId() {
+    @NonNull
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(@NonNull UUID id) {
         this.id = id;
     }
 
-    public long getDeckID() {
+    public UUID getDeckID() {
         return deckID;
     }
 
-    public void setDeckID(long deckID) {
+    public void setDeckID(UUID deckID) {
         this.deckID = deckID;
     }
 
-    public long getCardID() {
+    public UUID getCardID() {
         return cardID;
     }
 
-    public void setCardID(long cardID) {
+    public void setCardID(UUID cardID) {
         this.cardID = cardID;
     }
 }

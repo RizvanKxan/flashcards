@@ -19,21 +19,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flashcards.DecksBank;
 import com.example.flashcards.R;
 import com.example.flashcards.database.entity.Decks;
-import com.example.flashcards.database.entity.FlashCard;
 import com.example.flashcards.databinding.FragmentDecksBinding;
-import com.example.flashcards.ui.cards.CardFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DecksFragment extends Fragment {
 
-    private FragmentDecksBinding binding;
     public RecyclerView recyclerView;
-    private DecksAdapter decksAdapter;
+    private FragmentDecksBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         DecksViewModel galleryViewModel =
                 new ViewModelProvider(this).get(DecksViewModel.class);
 
@@ -42,14 +39,20 @@ public class DecksFragment extends Fragment {
 
         recyclerView = binding.decksRV;
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        List<Decks> decks = new ArrayList<>();
+        List<Decks> decks;
         decks = DecksBank.get().getDecks();
-        decksAdapter = new DecksAdapter(decks);
+        DecksAdapter decksAdapter = new DecksAdapter(decks);
         recyclerView.setAdapter(decksAdapter);
 
         final TextView textView = binding.textDecks;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DecksHolder> {
@@ -79,9 +82,9 @@ public class DecksFragment extends Fragment {
         }
 
         public class DecksHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+            Context context;
             private TextView mTitleTextView;
             private Decks decks;
-            Context context;
 
             public DecksHolder(LayoutInflater inflater, ViewGroup parent) {
                 super(inflater.inflate(R.layout.item_card, parent, false));
@@ -90,8 +93,6 @@ public class DecksFragment extends Fragment {
                 mTitleTextView = (TextView) itemView.findViewById(R.id.item_card_tv_name);
             }
 
-            // Метод будет вызываться каждый раз, когда RecyclerView потребует связать
-            // данный объект CardsHolder с объектом конкретной карточки.
             public void bind(Decks decks) {
                 this.decks = decks;
                 mTitleTextView.setText(decks.getName());
@@ -103,19 +104,12 @@ public class DecksFragment extends Fragment {
                 selectedPos = getLayoutPosition();
                 notifyItemChanged(selectedPos);
                 Bundle arg = new Bundle();
-                arg.putLong(DECK_ID, decks.getId());
+                arg.putSerializable(DECK_ID, decks.getId());
                 DeckFragment fragment = DeckFragment.newInstance(decks.getId());
                 Navigation
                         .findNavController(view)
                         .navigate(R.id.action_nav_decks_to_nav_deck, arg);
-//                getActivity().getSupportFragmentManager().beginTransaction().add(fragment,"tag").commit();
             }
         }
-
-    }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }

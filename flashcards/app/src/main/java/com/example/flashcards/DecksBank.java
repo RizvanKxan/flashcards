@@ -16,6 +16,7 @@ public class DecksBank {
     private List<Decks> decksList;
     private List<Deck> deckList;
     private List<Decks> newDecksList;
+    private List<Deck> newDeckList;
 
     private DecksBank(ExecutorService executorService) {
         this.executorService = executorService;
@@ -24,6 +25,7 @@ public class DecksBank {
 
         decksList = new ArrayList<>();
         newDecksList = new ArrayList<>();
+        newDeckList = new ArrayList<>();
 
         executorService.execute(() -> {
             decksList = deckDao.getAllDecks();
@@ -39,14 +41,19 @@ public class DecksBank {
         return sBank;
     }
 
-    public void addDeck(Decks decks) {
+    public void addDecks(Decks decks) {
         decksList.add(decks);
         newDecksList.add(decks);
     }
 
+    public void addDeck(Deck deck) {
+        deckList.add(deck);
+        newDeckList.add(deck);
+    }
     public void saveBank() {
         executorService.execute(() -> {
-            deckDao.insertListDeck(newDecksList);
+            deckDao.insertListDecks(newDecksList);
+            deckDao.insertListDeck(newDeckList);
         });
     }
 

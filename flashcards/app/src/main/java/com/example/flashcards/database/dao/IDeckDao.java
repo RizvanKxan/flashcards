@@ -10,6 +10,7 @@ import com.example.flashcards.database.entity.Deck;
 import com.example.flashcards.database.entity.Decks;
 
 import java.util.List;
+import java.util.UUID;
 
 @Dao
 public interface IDeckDao {
@@ -21,12 +22,14 @@ public interface IDeckDao {
     List<Deck> getAllDeck();
 
     @Query("SELECT * FROM deck WHERE id = :id")
-    Decks getDeckById(long id);
+    Decks getDeckById(UUID id);
 
     @Insert(onConflict = REPLACE)
-    void insertDeck(Decks decks);
+    void insertDeck(Deck deck);
 
     @Insert(onConflict = REPLACE)
-    void insertListDeck(List<Decks> decks);
+    void insertListDecks(List<Decks> decks);
 
+    @Insert(onConflict = REPLACE)
+    void insertListDeck(List<Deck> deck);
 }

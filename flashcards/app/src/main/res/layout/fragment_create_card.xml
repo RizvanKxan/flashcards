@@ -31,6 +31,16 @@
             android:hint="@string/create_card_et_value_hint"
             app:layout_constraintTop_toBottomOf="@id/create_card_et_word"/>
 
+
+        <Spinner
+            android:id="@+id/spinnerDecks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/create_card_et_value"/>
+
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="wrap_content"
@@ -41,7 +51,7 @@
             android:text="@string/btn_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_card_et_value"
+            app:layout_constraintTop_toBottomOf="@id/spinnerDecks"
             app:layout_constraintRight_toLeftOf="@id/btnCancel"/>
 
         <Button
@@ -55,6 +65,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/btnAdd"
-            app:layout_constraintTop_toBottomOf="@id/create_card_et_value" />
+            app:layout_constraintTop_toBottomOf="@id/spinnerDecks" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

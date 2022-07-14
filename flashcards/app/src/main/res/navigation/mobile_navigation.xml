@@ -56,6 +56,6 @@
         tools:layout="@layout/fragment_deck" >
         <argument
             android:name="deckId"
-            app:argType="long" />
+            app:argType="java.util.UUID" />
     </fragment>
 </navigation>
