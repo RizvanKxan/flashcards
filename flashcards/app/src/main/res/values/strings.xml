@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">flashcards</string>
+    <string name="app_name">Флэш-карточки</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Настройки</string>
 
     <string name="menu_home">Главная</string>
     <string name="menu_decks">Колоды</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_slideshow">Слайдшоу</string>
     <string name="home_btn_cards_text">Добавить карточку</string>
     <string name="home_btn_add_deck">Добавить колоду</string>
     <string name="menu_cards">Карточки</string>
@@ -28,6 +28,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="slideshow_btn">Открыть</string>
-    <string name="fragment_create_deck_et_hint">Введите название колоды...</string>
+    <string name="fragment_create_deck_et_hint">Введите название колоды…</string>
     <string name="item_card_delete_card">Удалить карточку</string>
+    <string name="menu_card">Карточка</string>
 </resources>

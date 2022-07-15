@@ -1,5 +1,7 @@
 package com.example.flashcards.ui.decks;
 
+import static com.example.flashcards.ui.cards.CardFragment.CARD_ID;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,40 +66,9 @@ public class DeckFragment extends Fragment {
     }
 
 
-    private class DeckHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView mTitleTextView2;
-        FlashCard cardD;
-        private Deck deck;
 
-        public DeckHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.item_deck, parent, false));
 
-            itemView.setOnClickListener(this);
-            mTitleTextView2 = itemView.findViewById(R.id.item_deck_tv_card_id);
-        }
-
-        // Метод будет вызываться каждый раз, когда RecyclerView потребует связать
-        // данный объект CardsHolder с объектом конкретной карточки.
-        public void bind(Deck deck) {
-            this.deck = deck;
-
-            cardD = CardsBank.get().getCard(deck.getCardID());
-            if (cardD != null) {
-                update();
-            }
-        }
-
-        private void update() {
-            mTitleTextView2.setText(cardD.getWord());
-        }
-
-        @Override
-        public void onClick(View view) {
-
-        }
-    }
-
-    private class DeckAdapter extends RecyclerView.Adapter<DeckHolder> {
+    private class DeckAdapter extends RecyclerView.Adapter<DeckAdapter.DeckHolder> {
         private final List<Deck> decks;
 
         public DeckAdapter(List<Deck> deck) {
@@ -121,5 +93,41 @@ public class DeckFragment extends Fragment {
             return decks.size();
         }
 
+        private class DeckHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+            private final TextView mTitleTextView2;
+            FlashCard cardD;
+            private Deck deck;
+
+            public DeckHolder(LayoutInflater inflater, ViewGroup parent) {
+                super(inflater.inflate(R.layout.item_deck, parent, false));
+
+                itemView.setOnClickListener(this);
+                mTitleTextView2 = itemView.findViewById(R.id.item_deck_tv_card_id);
+            }
+
+            // Метод будет вызываться каждый раз, когда RecyclerView потребует связать
+            // данный объект CardsHolder с объектом конкретной карточки.
+            public void bind(Deck deck) {
+                this.deck = deck;
+
+                cardD = CardsBank.get().getCard(deck.getCardID());
+                if (cardD != null) {
+                    update();
+                }
+            }
+
+            private void update() {
+                mTitleTextView2.setText(cardD.getWord());
+            }
+
+            @Override
+            public void onClick(View view) {
+                notifyItemChanged(getAdapterPosition());
+                Bundle arg = new Bundle();
+                //ToDo cardID может быть null, выяснить почему
+                arg.putSerializable(CARD_ID, cardD.getId());
+                Navigation.findNavController(view).navigate(R.id.action_nav_deck_to_nav_card_fragment, arg);
+            }
+        }
     }
 }

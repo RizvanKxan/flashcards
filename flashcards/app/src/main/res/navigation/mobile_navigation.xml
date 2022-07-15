@@ -25,7 +25,11 @@
         tools:layout="@layout/fragment_decks" >
         <action
             android:id="@+id/action_nav_decks_to_nav_deck"
-            app:destination="@id/nav_deck" />
+            app:destination="@id/nav_deck"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -38,6 +42,9 @@
         android:name="com.example.flashcards.ui.cards.CardsListFragment"
         android:label="@string/menu_cards"
         tools:layout="@layout/fragment_card_list" >
+        <action
+            android:id="@+id/action_nav_cards_to_nav_card_fragment"
+            app:destination="@id/nav_card_fragment" />
     </fragment>
     <dialog
         android:id="@+id/nav_create_card"
@@ -57,5 +64,17 @@
         <argument
             android:name="deckId"
             app:argType="java.util.UUID" />
+        <action
+            android:id="@+id/action_nav_deck_to_nav_card_fragment"
+            app:destination="@id/nav_card_fragment" />
     </fragment>
+    <dialog
+        android:id="@+id/nav_card_fragment"
+        android:name="com.example.flashcards.ui.cards.CardFragment"
+        android:label="@string/menu_card"
+        tools:layout="@layout/fragment_card" >
+        <argument
+            android:name="cardId"
+            app:argType="java.util.UUID" />
+    </dialog>
 </navigation>

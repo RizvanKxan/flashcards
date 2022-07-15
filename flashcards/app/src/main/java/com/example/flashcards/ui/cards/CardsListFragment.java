@@ -1,5 +1,7 @@
 package com.example.flashcards.ui.cards;
 
+import static com.example.flashcards.ui.cards.CardFragment.CARD_ID;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -119,8 +122,9 @@ public class CardsListFragment extends Fragment {
                 notifyItemChanged(selectedPos);
                 selectedPos = getLayoutPosition();
                 notifyItemChanged(selectedPos);
-                CardFragment fragment = CardFragment.newInstance(mCard.getId());
-                fragment.show(getActivity().getSupportFragmentManager(), "tag");
+                Bundle arg = new Bundle();
+            arg.putSerializable(CARD_ID, mCard.getId());
+            Navigation.findNavController(view).navigate(R.id.action_nav_cards_to_nav_card_fragment, arg);
             }
         }
     }

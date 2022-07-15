@@ -22,20 +22,22 @@ import java.util.UUID;
 
 public class CardFragment extends DialogFragment {
 
+    public static final String CARD_ID = "cardId";
+    private UUID cardId;
     EditText etW;
     EditText etV;
     private FlashCard mCard;
     private Button mBtnAdd;
     private FragmentCardBinding binding;
 
-    //ToDo Cтоит отказаться от параметров передаваемых в конструктор фрагмента
-    public CardFragment(UUID id) {
-        getCard(id);
-    }
 
-    public static CardFragment newInstance(UUID id) {
-        CardFragment fragment = new CardFragment(id);
-        return fragment;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if(getArguments() != null) {
+            cardId = (UUID) getArguments().getSerializable(CARD_ID);
+        }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +49,7 @@ public class CardFragment extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        mCard = CardsBank.get().getCard(cardId);
         etW = binding.fragmentCardEtWord;
         etW.setText(mCard.getWord());
         etV = binding.fragmentCardEtValue;
@@ -78,7 +80,7 @@ public class CardFragment extends DialogFragment {
         btnCancel.setOnClickListener(view1 -> dismiss());
     }
 
-    public void getCard(UUID id) {
-        mCard = CardsBank.get().getCard(id);
-    }
+//    public void getCard(UUID id) {
+//        mCard = CardsBank.get().getCard(id);
+//    }
 }

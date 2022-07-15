@@ -4,7 +4,7 @@
     android:id="@+id/cards_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#9C27B0"
     tools:context=".ui.cards.CardsListFragment">
 
 </androidx.recyclerview.widget.RecyclerView>
