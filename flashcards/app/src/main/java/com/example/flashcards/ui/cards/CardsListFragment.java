@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,18 +44,7 @@ public class CardsListFragment extends Fragment {
 
         mCardsRecyclerView = binding.cardsRecyclerView;
         mCardsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        List<FlashCard> cards = new ArrayList<>();
-        CardsBank.get().getCards(new CardsBank.Result<List<FlashCard>>() {
-            @Override
-            public void onSuccess(List<FlashCard> flashCards) {
-                cards.addAll(flashCards);
-            }
-
-            @Override
-            public void onError(Exception exception) {
-
-            }
-        });
+        List<FlashCard> cards = CardsBank.get().getCards();
         cardsAdapter = new CardsAdapter(cards);
         mCardsRecyclerView.setAdapter(cardsAdapter);
         return view;
@@ -101,17 +91,27 @@ public class CardsListFragment extends Fragment {
             Context context;
             private final TextView mTitleTextView;
             private FlashCard mCard;
+            private ImageButton deleteCard;
 
             public CardsHolder(LayoutInflater inflater, ViewGroup parent) {
                 super(inflater.inflate(R.layout.item_card, parent, false));
                 context = parent.getContext();
                 itemView.setOnClickListener(this);
                 mTitleTextView = itemView.findViewById(R.id.item_card_tv_name);
+                deleteCard = itemView.findViewById(R.id.itemDelete);
+                deleteCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        CardsBank.get().deleteCard(mCard);
+                        notifyDataSetChanged();
+                    }
+                });
             }
 
             public void bind(FlashCard card) {
                 mCard = card;
                 mTitleTextView.setText(card.getWord());
+
             }
 
             @Override

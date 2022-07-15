@@ -30,6 +30,9 @@ public interface FlashCardDao {
     @Insert(onConflict = REPLACE)
     void insertFlashCard(FlashCard card);
 
+    @Insert(onConflict = REPLACE)
+    void insertListFlashCard(List<FlashCard> cards);
+
     @Delete
     void deleteFlashCard(FlashCard card);
 

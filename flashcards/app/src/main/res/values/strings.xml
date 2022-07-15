@@ -29,4 +29,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="slideshow_btn">Открыть</string>
     <string name="fragment_create_deck_et_hint">Введите название колоды...</string>
+    <string name="item_card_delete_card">Удалить карточку</string>
 </resources>

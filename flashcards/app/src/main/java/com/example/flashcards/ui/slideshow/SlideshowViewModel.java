@@ -26,18 +26,7 @@ public class SlideshowViewModel extends ViewModel {
         mText = new MutableLiveData<>();
         mText.setValue("Фрагмент с слайдшоу.");
         mCards = new MutableLiveData<>();
-        List<FlashCard> cards = new ArrayList<>();
-        CardsBank.get().getCards(new CardsBank.Result<List<FlashCard>>() {
-            @Override
-            public void onSuccess(List<FlashCard> flashCards) {
-                cards.addAll(flashCards);
-            }
-
-            @Override
-            public void onError(Exception exception) {
-
-            }
-        });
+        List<FlashCard> cards = CardsBank.get().getCards();
         mCards.setValue(cards);
     }
 

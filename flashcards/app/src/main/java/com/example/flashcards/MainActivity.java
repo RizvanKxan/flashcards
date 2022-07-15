@@ -67,12 +67,14 @@ public class MainActivity extends AppCompatActivity{
     protected void onPause() {
         super.onPause();
         DecksBank.get().saveBank();
+        CardsBank.get().saveBank();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         DecksBank.get().saveBank();
+        CardsBank.get().saveBank();
     }
 
     @Override

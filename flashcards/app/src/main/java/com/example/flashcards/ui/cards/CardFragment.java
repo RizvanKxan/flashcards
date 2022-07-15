@@ -47,6 +47,7 @@ public class CardFragment extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         etW = binding.fragmentCardEtWord;
         etW.setText(mCard.getWord());
         etV = binding.fragmentCardEtValue;
@@ -78,16 +79,6 @@ public class CardFragment extends DialogFragment {
     }
 
     public void getCard(UUID id) {
-        CardsBank.get().getCard(new CardsBank.Result<FlashCard>() {
-            @Override
-            public void onSuccess(FlashCard card) {
-                mCard = card;
-            }
-
-            @Override
-            public void onError(Exception exception) {
-
-            }
-        }, id);
+        mCard = CardsBank.get().getCard(id);
     }
 }

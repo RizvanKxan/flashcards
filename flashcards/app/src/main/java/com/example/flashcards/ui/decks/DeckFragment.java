@@ -50,11 +50,11 @@ public class DeckFragment extends Fragment {
 
         View view = binding.getRoot();
 
-        deckId = (UUID) getArguments().getSerializable(DECK_ID);
+        //deckId = (UUID) getArguments().getSerializable(DECK_ID);
         RecyclerView recyclerView = binding.fragmentDeckRv;
 
         List<Deck> deck;
-        deck = DecksBank.get().getAllDeck();
+        deck = DecksBank.get().getAllDeckId(deckId);
         DeckAdapter deckAdapter = new DeckAdapter(deck);
         recyclerView.setAdapter(deckAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -64,7 +64,6 @@ public class DeckFragment extends Fragment {
 
 
     private class DeckHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView mTitleTextView;
         private final TextView mTitleTextView2;
         FlashCard cardD;
         private Deck deck;
@@ -73,7 +72,6 @@ public class DeckFragment extends Fragment {
             super(inflater.inflate(R.layout.item_deck, parent, false));
 
             itemView.setOnClickListener(this);
-            mTitleTextView = itemView.findViewById(R.id.item_deck_tv_deck_id);
             mTitleTextView2 = itemView.findViewById(R.id.item_deck_tv_card_id);
         }
 
@@ -82,25 +80,14 @@ public class DeckFragment extends Fragment {
         public void bind(Deck deck) {
             this.deck = deck;
 
-            CardsBank.get().getCard(new CardsBank.Result<FlashCard>() {
-                @Override
-                public void onSuccess(FlashCard card) {
-                    cardD = card;
-                }
-
-                @Override
-                public void onError(Exception exception) {
-
-                }
-            }, deck.getCardID());
+            cardD = CardsBank.get().getCard(deck.getCardID());
             if (cardD != null) {
                 update();
             }
         }
 
         private void update() {
-            mTitleTextView.setText("deck_id: " + deck.getDeckID());
-            mTitleTextView2.setText("card_id: " + deck.getCardID() + " " + cardD.getWord());
+            mTitleTextView2.setText(cardD.getWord());
         }
 
         @Override

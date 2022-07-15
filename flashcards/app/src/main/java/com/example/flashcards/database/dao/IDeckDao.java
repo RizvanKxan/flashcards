@@ -3,11 +3,13 @@ package com.example.flashcards.database.dao;
 import static androidx.room.OnConflictStrategy.REPLACE;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.flashcards.database.entity.Deck;
 import com.example.flashcards.database.entity.Decks;
+import com.example.flashcards.database.entity.FlashCard;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,4 +34,7 @@ public interface IDeckDao {
 
     @Insert(onConflict = REPLACE)
     void insertListDeck(List<Deck> deck);
+
+    @Delete
+    void deleteDecks(Decks decks);
 }

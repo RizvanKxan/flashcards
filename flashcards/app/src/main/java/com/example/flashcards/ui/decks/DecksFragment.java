@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flashcards.CardsBank;
 import com.example.flashcards.DecksBank;
 import com.example.flashcards.R;
 import com.example.flashcards.database.entity.Decks;
@@ -84,6 +86,7 @@ public class DecksFragment extends Fragment {
         public class DecksHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             Context context;
             private TextView mTitleTextView;
+            private ImageButton deleteDeck;
             private Decks decks;
 
             public DecksHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -91,6 +94,14 @@ public class DecksFragment extends Fragment {
                 context = parent.getContext();
                 itemView.setOnClickListener(this);
                 mTitleTextView = (TextView) itemView.findViewById(R.id.item_card_tv_name);
+                deleteDeck = itemView.findViewById(R.id.itemDelete);
+                deleteDeck.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DecksBank.get().deleteCard(decks);
+                        notifyDataSetChanged();
+                    }
+                });
             }
 
             public void bind(Decks decks) {
@@ -105,7 +116,7 @@ public class DecksFragment extends Fragment {
                 notifyItemChanged(selectedPos);
                 Bundle arg = new Bundle();
                 arg.putSerializable(DECK_ID, decks.getId());
-                DeckFragment fragment = DeckFragment.newInstance(decks.getId());
+                //DeckFragment fragment = DeckFragment.newInstance(decks.getId());
                 Navigation
                         .findNavController(view)
                         .navigate(R.id.action_nav_decks_to_nav_deck, arg);

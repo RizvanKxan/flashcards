@@ -6,8 +6,10 @@ import com.example.flashcards.database.entity.Decks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class DecksBank {
     private static DecksBank sBank;
@@ -63,5 +65,17 @@ public class DecksBank {
 
     public List<Deck> getAllDeck() {
         return deckList;
+    }
+
+    public List<Deck> getAllDeckId(UUID id) {
+        return deckList.stream().filter(s -> s.getDeckID().equals(id)).collect(Collectors.toList());
+    }
+
+    public void deleteCard(Decks decks) {
+        decksList.remove(decks);
+        newDecksList.remove(decks);
+        executorService.execute(()-> {
+            deckDao.deleteDecks(decks);
+        });
     }
 }
