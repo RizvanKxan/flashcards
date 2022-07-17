@@ -28,10 +28,6 @@ public class CardsBank {
 
         cardList = new ArrayList<>();
         newCardList = new ArrayList<>();
-
-        executorService.execute(() -> {
-            cardList = cardsDao.getAll();
-        });
     }
 
     public static CardsBank get() {
@@ -39,6 +35,12 @@ public class CardsBank {
             sBank = new CardsBank(Executors.newSingleThreadExecutor());
         }
         return sBank;
+    }
+
+    public void openBank() {
+        executorService.execute(() -> {
+            cardList = cardsDao.getAll();
+        });
     }
 
     public void saveBank() {

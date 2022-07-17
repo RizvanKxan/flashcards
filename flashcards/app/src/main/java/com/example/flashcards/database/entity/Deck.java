@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.UUID;
@@ -39,6 +40,9 @@ public class Deck {
     @ColumnInfo(name = "card_ID")
     private UUID cardID;
 
+    @Ignore
+    private final UUID defaultUUID = UUID.randomUUID();
+
     public Deck() {
 
     }
@@ -58,6 +62,9 @@ public class Deck {
     }
 
     public UUID getDeckID() {
+        if (deckID == null) {
+            return defaultUUID;
+        }
         return deckID;
     }
 

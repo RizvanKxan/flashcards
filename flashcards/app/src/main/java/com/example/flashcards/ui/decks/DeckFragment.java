@@ -46,14 +46,13 @@ public class DeckFragment extends Fragment {
         }
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         FragmentDeckBinding binding = FragmentDeckBinding.inflate(inflater, container, false);
 
         View view = binding.getRoot();
 
-        //deckId = (UUID) getArguments().getSerializable(DECK_ID);
         RecyclerView recyclerView = binding.fragmentDeckRv;
 
         List<Deck> deck;
@@ -64,8 +63,6 @@ public class DeckFragment extends Fragment {
 
         return view;
     }
-
-
 
 
     private class DeckAdapter extends RecyclerView.Adapter<DeckAdapter.DeckHolder> {
@@ -112,21 +109,22 @@ public class DeckFragment extends Fragment {
 
                 cardD = CardsBank.get().getCard(deck.getCardID());
                 if (cardD != null) {
-                    update();
+                    mTitleTextView2.setText(cardD.getWord());
+                } else {
+                    mTitleTextView2.setText("Карточка удалена..(");
                 }
             }
 
-            private void update() {
-                mTitleTextView2.setText(cardD.getWord());
-            }
 
             @Override
             public void onClick(View view) {
-                notifyItemChanged(getAdapterPosition());
-                Bundle arg = new Bundle();
-                //ToDo cardID может быть null, выяснить почему
-                arg.putSerializable(CARD_ID, cardD.getId());
-                Navigation.findNavController(view).navigate(R.id.action_nav_deck_to_nav_card_fragment, arg);
+                if (cardD != null) {
+                    notifyItemChanged(getAdapterPosition());
+                    Bundle arg = new Bundle();
+                    //ToDo cardID может быть null, выяснить почему
+                    arg.putSerializable(CARD_ID, cardD.getId());
+                    Navigation.findNavController(view).navigate(R.id.action_nav_deck_to_nav_card_fragment, arg);
+                }
             }
         }
     }

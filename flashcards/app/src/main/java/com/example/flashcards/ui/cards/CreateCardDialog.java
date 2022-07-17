@@ -57,8 +57,10 @@ public class CreateCardDialog extends DialogFragment {
             } else {
                 FlashCard card = new FlashCard(word, value);
                 CardsBank.get().addCard(card);
-                Deck deck = new Deck(deckId, card.getId());
-                DecksBank.get().addDeck(deck);
+                if(deckId != null) {
+                    Deck deck = new Deck(deckId, card.getId());
+                    DecksBank.get().addDeck(deck);
+                }
                 Toast msg = Toast.makeText(getActivity(), R.string.addCardSuccess, Toast.LENGTH_SHORT);
                 msg.show();
                 dismiss();
