@@ -20,14 +20,17 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.flashcards.R;
 import com.example.flashcards.databinding.FragmentSlideshowBinding;
 
+import java.util.UUID;
+
 public class SlideshowFragment extends Fragment {
     private FragmentSlideshowBinding binding;
 
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        SlideshowViewModelFactory factory = new SlideshowViewModelFactory(UUID.randomUUID());
         SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+                new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(SlideshowViewModel.class);
 
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
@@ -36,7 +39,7 @@ public class SlideshowFragment extends Fragment {
         FrameLayout fr2 = binding.bottomCard;
         //fr2.setBackgroundColor(Color.CYAN);
         final TextView tv = binding.tvText;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), tv::setText);
+        slideshowViewModel.getText().observe(getViewLifecycleOwner(), text -> tv.setText(text));
         MotionLayout motion = binding.motionLayout;
         motion.setTransitionListener(new TransitionAdapter() {
             @Override

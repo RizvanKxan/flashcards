@@ -24,8 +24,8 @@ public class CardFragment extends DialogFragment {
 
     public static final String CARD_ID = "cardId";
     private UUID cardId;
-    EditText etW;
-    EditText etV;
+    private EditText etW;
+    private EditText etV;
     private FlashCard mCard;
     private Button mBtnAdd;
     private FragmentCardBinding binding;
@@ -79,8 +79,4 @@ public class CardFragment extends DialogFragment {
         Button btnCancel = binding.fragmentCardBtnCancel;
         btnCancel.setOnClickListener(view1 -> dismiss());
     }
-
-//    public void getCard(UUID id) {
-//        mCard = CardsBank.get().getCard(id);
-//    }
 }
