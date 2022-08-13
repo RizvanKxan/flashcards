@@ -9,20 +9,23 @@
         android:id="@+id/nav_home"
         android:name="com.example.flashcards.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_nav_home_to_nav_create_card"
             app:destination="@id/nav_create_card" />
         <action
             android:id="@+id/action_nav_home_to_nav_create_deck"
             app:destination="@id/nav_create_deck" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_decks"
         android:name="com.example.flashcards.ui.decks.DecksFragment"
         android:label="@string/menu_decks"
-        tools:layout="@layout/fragment_decks" >
+        tools:layout="@layout/fragment_decks">
         <action
             android:id="@+id/action_nav_decks_to_nav_deck"
             app:destination="@id/nav_deck"
@@ -37,30 +40,22 @@
         android:name="com.example.flashcards.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
     <fragment
         android:id="@+id/nav_cards"
         android:name="com.example.flashcards.ui.cards.CardsListFragment"
         android:label="@string/menu_cards"
-        tools:layout="@layout/fragment_card_list" >
+        tools:layout="@layout/fragment_card_list">
         <action
             android:id="@+id/action_nav_cards_to_nav_card_fragment"
             app:destination="@id/nav_card_fragment" />
     </fragment>
-    <dialog
-        android:id="@+id/nav_create_card"
-        android:name="com.example.flashcards.ui.cards.CreateCardDialog"
-        android:label="CreateCardDialog"
-        tools:layout="@layout/fragment_create_card" />
-    <dialog
-        android:id="@+id/nav_create_deck"
-        android:name="com.example.flashcards.ui.decks.CreateDeckDialog"
-        android:label="CreateDeckDialog"
-        tools:layout="@layout/fragment_create_deck" />
+
     <fragment
         android:id="@+id/nav_deck"
         android:name="com.example.flashcards.ui.decks.DeckFragment"
-        android:label="fragment_deck"
-        tools:layout="@layout/fragment_deck" >
+        android:label="@string/deck_content"
+        tools:layout="@layout/fragment_deck">
         <argument
             android:name="deckId"
             app:argType="java.util.UUID" />
@@ -68,13 +63,28 @@
             android:id="@+id/action_nav_deck_to_nav_card_fragment"
             app:destination="@id/nav_card_fragment" />
     </fragment>
+
+    <dialog
+        android:id="@+id/nav_create_card"
+        android:name="com.example.flashcards.ui.cards.CreateCardDialog"
+        android:label="CreateCardDialog"
+        tools:layout="@layout/fragment_create_card" />
+
+    <dialog
+        android:id="@+id/nav_create_deck"
+        android:name="com.example.flashcards.ui.decks.CreateDeckDialog"
+        android:label="CreateDeckDialog"
+        tools:layout="@layout/fragment_create_deck" />
+
+
     <dialog
         android:id="@+id/nav_card_fragment"
         android:name="com.example.flashcards.ui.cards.CardFragment"
         android:label="@string/menu_card"
-        tools:layout="@layout/fragment_card" >
+        tools:layout="@layout/fragment_card">
         <argument
             android:name="cardId"
             app:argType="java.util.UUID" />
     </dialog>
+
 </navigation>

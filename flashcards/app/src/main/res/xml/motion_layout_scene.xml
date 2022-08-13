@@ -29,6 +29,7 @@
         </KeyFrameSet>
     </Transition>
 
+
     <Transition
         motion:constraintSetEnd="@+id/like"
         motion:constraintSetStart="@+id/start"
@@ -87,11 +88,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="60dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="150dp"
                 android:layout_marginEnd="60dp"
-                android:layout_marginBottom="70dp"
-                />
- />
+                android:layout_marginBottom="150dp" />
+            />
 
         </Constraint>
 
@@ -101,9 +101,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="60dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="150dp"
                 android:layout_marginEnd="60dp"
-                android:layout_marginBottom="70dp" />
+                android:layout_marginBottom="150dp" />
             <Transform
                 android:scaleX="0.90"
                 android:scaleY="0.90" />
@@ -154,9 +154,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="200dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="300dp"
+            android:layout_marginBottom="75dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintWidth_percent="0.7" />
 
@@ -194,12 +194,12 @@
             android:id="@id/top_card"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="75dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="75dp"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintWidth_percent="0.7"></Constraint>
+            motion:layout_constraintWidth_percent="0.7" />
 
 
         <Constraint android:id="@id/bottom_card">

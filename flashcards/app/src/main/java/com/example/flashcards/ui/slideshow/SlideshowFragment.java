@@ -19,6 +19,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.flashcards.R;
 import com.example.flashcards.databinding.FragmentSlideshowBinding;
+import com.example.flashcards.ui.home.HomeViewModel;
+
+import java.util.UUID;
 
 public class SlideshowFragment extends Fragment {
     private FragmentSlideshowBinding binding;
@@ -36,7 +39,7 @@ public class SlideshowFragment extends Fragment {
         FrameLayout fr2 = binding.bottomCard;
         //fr2.setBackgroundColor(Color.CYAN);
         final TextView tv = binding.tvText;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), tv::setText);
+        slideshowViewModel.getText().observe(getViewLifecycleOwner(), text -> tv.setText(text));
         MotionLayout motion = binding.motionLayout;
         motion.setTransitionListener(new TransitionAdapter() {
             @Override
