@@ -23,14 +23,17 @@ import com.example.flashcards.ui.home.HomeViewModel;
 
 import java.util.UUID;
 
+import java.util.UUID;
+
 public class SlideshowFragment extends Fragment {
     private FragmentSlideshowBinding binding;
 
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        SlideshowViewModelFactory factory = new SlideshowViewModelFactory(UUID.randomUUID());
         SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+                new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(SlideshowViewModel.class);
 
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
