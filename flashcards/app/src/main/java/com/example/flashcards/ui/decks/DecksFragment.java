@@ -17,7 +17,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.flashcards.CardsBank;
 import com.example.flashcards.DecksBank;
 import com.example.flashcards.R;
 import com.example.flashcards.database.entity.Decks;
@@ -98,7 +97,7 @@ public class DecksFragment extends Fragment {
                 deleteDeck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DecksBank.get().deleteCard(decks);
+                        DecksBank.get().deleteDecks(decks);
                         notifyDataSetChanged();
                     }
                 });

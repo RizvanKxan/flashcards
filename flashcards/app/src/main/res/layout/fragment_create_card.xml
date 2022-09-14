@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/dialog_gradient"
     tools:context=".ui.cards.CreateCardDialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,55 +17,66 @@
             android:id="@+id/create_card_et_word"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:hint="@string/create_card_et_word_hint"
+            android:textColor="@color/white"
+            android:textColorHint="#B5AFAF"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:hint="@string/create_card_et_word_hint" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:layout_marginTop="10dp"
             android:id="@+id/create_card_et_value"
             android:layout_width="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
             android:hint="@string/create_card_et_value_hint"
-            app:layout_constraintTop_toBottomOf="@id/create_card_et_word"/>
+            android:textColor="@color/white"
+            android:textColorHint="#B5AFAF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_card_et_word" />
 
 
         <Spinner
             android:id="@+id/spinnerDecks"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:textAlignment="center"
             android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:backgroundTint="@color/yellow"
+            android:popupBackground="@color/teal_700"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-
-            app:layout_constraintTop_toBottomOf="@id/create_card_et_value"/>
+            app:layout_constraintTop_toBottomOf="@id/create_card_et_value" />
 
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:backgroundTint="#047787"
             android:text="@string/btn_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerDecks"
-            app:layout_constraintRight_toLeftOf="@id/btnCancel"/>
+            app:layout_constraintRight_toLeftOf="@id/btnCancel"
+            app:layout_constraintTop_toBottomOf="@id/spinnerDecks" />
 
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_cancel"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
+            android:backgroundTint="#047787"
+            android:text="@string/btn_cancel"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/btnAdd"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinnerDecks" />
 
 

@@ -1,8 +1,5 @@
 package com.example.flashcards;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.example.flashcards.database.AppDatabase;
 import com.example.flashcards.database.dao.FlashCardDao;
 import com.example.flashcards.database.entity.FlashCard;
@@ -84,6 +81,9 @@ public class CardsBank {
             card2.setWord(card.getWord());
             card2.setValue(card.getValue());
         }
+        executorService.execute(()-> {
+            cardsDao.updateFlashCard(card);
+        });
     }
 
     public void deleteCard(FlashCard mCard) {

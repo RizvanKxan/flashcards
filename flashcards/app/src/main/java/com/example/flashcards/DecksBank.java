@@ -74,7 +74,7 @@ public class DecksBank {
         return deckList.stream().filter(s -> s.getDeckID().equals(id)).collect(Collectors.toList());
     }
 
-    public void deleteCard(Decks decks) {
+    public void deleteDecks(Decks decks) {
         decksList.remove(decks);
         newDecksList.remove(decks);
         executorService.execute(()-> {

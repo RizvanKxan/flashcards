@@ -56,7 +56,6 @@ public class CardsListFragment extends Fragment {
     public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.CardsHolder> {
 
         private List<FlashCard> mCards;
-        private int selectedPos = -1;
 
         public CardsAdapter(List<FlashCard> cards) {
             mCards = cards;
@@ -72,11 +71,6 @@ public class CardsListFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull CardsHolder holder, int position) {
             FlashCard card = mCards.get(position);
-            if (selectedPos == position) {
-                holder.itemView.setBackgroundColor(Color.GREEN);
-            } else {
-                holder.itemView.setBackgroundColor(Color.WHITE);
-            }
             holder.bind(card);
         }
 
@@ -91,14 +85,12 @@ public class CardsListFragment extends Fragment {
 
         public class CardsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-            Context context;
             private final TextView mTitleTextView;
             private FlashCard mCard;
             private ImageButton deleteCard;
 
             public CardsHolder(LayoutInflater inflater, ViewGroup parent) {
                 super(inflater.inflate(R.layout.item_card, parent, false));
-                context = parent.getContext();
                 itemView.setOnClickListener(this);
                 mTitleTextView = itemView.findViewById(R.id.item_card_tv_name);
                 deleteCard = itemView.findViewById(R.id.itemDelete);
@@ -119,9 +111,6 @@ public class CardsListFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                notifyItemChanged(selectedPos);
-                selectedPos = getLayoutPosition();
-                notifyItemChanged(selectedPos);
                 Bundle arg = new Bundle();
             arg.putSerializable(CARD_ID, mCard.getId());
             Navigation.findNavController(view).navigate(R.id.action_nav_cards_to_nav_card_fragment, arg);

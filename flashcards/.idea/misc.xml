@@ -3,15 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2825" />
+        <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/drawable/dialog_gradient.xml" value="0.1785" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/drawable/gradient.xml" value="0.134" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/drawable/ic_launcher_background.xml" value="0.34" />
+        <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/drawable/ic_menu_camera.xml" value="0.2825" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.134" />
+        <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.2825" />
+        <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/drawable/main_background_gradient.xml" value="0.1275" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/drawable/side_nav_bar.xml" value="0.34" />
+        <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout-land/fragment_home.xml" value="0.14666666666666667" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/activity_cards_view_pager.xml" value="0.16197916666666667" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/activity_screen_slide.xml" value="0.1609375" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/activity_view_pager.xml" value="0.16197916666666667" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
+        <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/content_main.xml" value="0.23505434782608695" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/create_card.xml" value="0.3338541666666667" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/fragment_card.xml" value="0.25" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/fragment_card_list.xml" value="0.20697463768115942" />
@@ -24,11 +31,13 @@
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/fragment_slide_page.xml" value="0.16197916666666667" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/fragment_slideshow.xml" value="0.25" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/item_card.xml" value="0.20697463768115942" />
+        <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/item_deck.xml" value="0.3494791666666667" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/motion_layout.xml" value="0.25" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/nav_header_main.xml" value="0.5" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/layout/view_pager_card.xml" value="0.1609375" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/menu/activity_main_drawer.xml" value="0.2015625" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/menu/main.xml" value="0.16197916666666667" />
+        <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2825" />
         <entry key="..\:/rizu_c#/flashcards/flashcards/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.34" />
       </map>
     </option>

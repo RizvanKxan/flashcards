@@ -1,5 +1,7 @@
 package com.example.flashcards.ui.slideshow;
 
+import static com.example.flashcards.ui.decks.DeckFragment.DECK_ID;
+
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,20 +29,25 @@ import java.util.UUID;
 
 public class SlideshowFragment extends Fragment {
     private FragmentSlideshowBinding binding;
+    private UUID deckId;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            deckId = (UUID) getArguments().getSerializable(DECK_ID);
+        }
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModelFactory factory = new SlideshowViewModelFactory(UUID.randomUUID());
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(SlideshowViewModel.class);
-
+        SlideshowViewModel slideshowViewModel = new ViewModelProvider(this).get(SlideshowViewModel.class);
+        slideshowViewModel.setDeckId(deckId);
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        FrameLayout fr = binding.topCard;
-        //fr.setBackgroundColor(Color.CYAN);
-        FrameLayout fr2 = binding.bottomCard;
-        //fr2.setBackgroundColor(Color.CYAN);
+
         final TextView tv = binding.tvText;
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), text -> tv.setText(text));
         MotionLayout motion = binding.motionLayout;
@@ -48,7 +55,6 @@ public class SlideshowFragment extends Fragment {
             @Override
             public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {
                 super.onTransitionCompleted(motionLayout, currentId);
-
 
                 if(currentId == R.id.offScreenPass || currentId == R.id.offScreenLike) {
 //                    motionLayout.setTransition(R.id.start, R.id.like);

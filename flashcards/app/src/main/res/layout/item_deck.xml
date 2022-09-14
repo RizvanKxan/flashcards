@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:cardBackgroundColor="#2DEA17"
+    app:cardBackgroundColor="#068C9E"
     app:cardCornerRadius="10dp">
 
     <TextView
         android:id="@+id/item_deck_tv_card_id"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"

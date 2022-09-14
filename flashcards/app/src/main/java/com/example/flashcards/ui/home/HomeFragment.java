@@ -38,9 +38,6 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
         Button btnAddCard = binding.homeBtnCards;
         Button btnAddDeck = binding.homeBtnAddDeck;
         Button btnTraining = binding.homeBtnTrainWords;

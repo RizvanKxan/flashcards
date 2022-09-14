@@ -39,7 +39,12 @@
         android:id="@+id/nav_slideshow"
         android:name="com.example.flashcards.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_slideshow">
+        <argument
+            android:name="deckId"
+            app:argType="java.util.UUID" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_cards"
@@ -62,6 +67,9 @@
         <action
             android:id="@+id/action_nav_deck_to_nav_card_fragment"
             app:destination="@id/nav_card_fragment" />
+        <action
+            android:id="@+id/action_nav_deck_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
     </fragment>
 
     <dialog

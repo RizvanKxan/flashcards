@@ -18,29 +18,23 @@ public class SlideshowViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
     private final MutableLiveData<List<FlashCard>> mCards;
-    private int i = -1;
+    private MutableLiveData<List<FlashCard>> mCardsDeck;
+    //позиция текущей карточки
+    private int currentCardPosition = -1;
     private UUID currentDeckId;
-
-    public boolean isValueShown() {
-        return isValueShown;
-    }
-
     private boolean isValueShown = false;
 
-    public SlideshowViewModel(UUID id) {
+    public SlideshowViewModel() {
         mCards = new MutableLiveData<>();
         List<FlashCard> cards = CardsBank.get().getCards();
         mCards.setValue(cards);
 
-        if(id != null) {
-            currentDeckId = id;
-            List<Deck> deck;
-            deck = DecksBank.get().getAllDeckId(currentDeckId);
-            List<UUID> idCards = new ArrayList<>();
-            deck.forEach(deck1 -> idCards.add(deck1.getCardID()));
-        }
         mText = new MutableLiveData<>();
-        mText.setValue("Фрагмент с слайдшоу.");
+        mText.setValue("Смахните карту в одну из сторон.");
+    }
+
+    public boolean isValueShown() {
+        return isValueShown;
     }
 
     public LiveData<String> getText() {
@@ -48,21 +42,21 @@ public class SlideshowViewModel extends ViewModel {
     }
 
     public void swipe() {
-        i = i + 1;
-        if (i < mCards.getValue().size()) {
-            mText.setValue(mCards.getValue().get(i).getWord());
+        currentCardPosition = currentCardPosition + 1;
+        if (currentCardPosition < mCards.getValue().size()) {
+            mText.setValue(mCards.getValue().get(currentCardPosition).getWord());
             isValueShown = false;
         } else {
-            mText.setValue("Пока больше нечего показать..");
+            mText.setValue("Карточек больше нет.");
         }
 
     }
 
     public void getValue() {
         isValueShown = true;
-        if (i == -1) return;
-        if (i < mCards.getValue().size()) {
-            mText.setValue(mCards.getValue().get(i).getValue());
+        if (currentCardPosition == -1) return;
+        if (currentCardPosition < mCards.getValue().size()) {
+            mText.setValue(mCards.getValue().get(currentCardPosition).getValue());
         } else {
             mText.setValue("Пока больше нечего показать..");
         }
@@ -70,11 +64,27 @@ public class SlideshowViewModel extends ViewModel {
 
     public void getWord() {
         isValueShown = false;
-        if (i == -1) return;
-        if (i < mCards.getValue().size()) {
-            mText.setValue(mCards.getValue().get(i).getWord());
+        if (currentCardPosition == -1) return;
+        if (currentCardPosition < mCards.getValue().size()) {
+            mText.setValue(mCards.getValue().get(currentCardPosition).getWord());
         } else {
             mText.setValue("Пока больше нечего показать..");
+        }
+    }
+
+    public void setDeckId(UUID deckId) {
+        if(deckId != null) {
+            currentDeckId = deckId;
+            List<Deck> deck;
+            deck = DecksBank.get().getAllDeckId(deckId);
+            List<UUID> carddd = new ArrayList<>();
+            deck.forEach((x) -> carddd.add(x.getCardID()));
+            List<FlashCard> cards = new ArrayList<>();
+            carddd.forEach((x) -> cards.add(CardsBank.get().getCard(x)));
+            mCards.setValue(cards);
+        } else {
+            List<FlashCard> cards = CardsBank.get().getCards();
+            mCards.setValue(cards);
         }
     }
 }

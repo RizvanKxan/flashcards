@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,17 @@ public class DeckFragment extends Fragment {
         View view = binding.getRoot();
 
         RecyclerView recyclerView = binding.fragmentDeckRv;
+        Button btnTrainDeck = binding.btnTrainDeck;
+
+        btnTrainDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle arg = new Bundle();
+                //ToDo cardID может быть null, выяснить почему
+                arg.putSerializable(DECK_ID, deckId);
+                Navigation.findNavController(view).navigate(R.id.action_nav_deck_to_nav_slideshow, arg);
+            }
+        });
 
         List<Deck> deck;
         deck = DecksBank.get().getAllDeckId(deckId);

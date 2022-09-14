@@ -10,7 +10,7 @@
     app:layoutDescription="@xml/motion_layout_scene"
     tools:showPaths="false"
     app:motionDebug="NO_DEBUG"
-    android:background="#9C27B0"
+    android:background= "@drawable/main_background_gradient"
     tools:context=".ui.slideshow.SlideshowFragment">
 
     <FrameLayout
@@ -51,6 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/top_card"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="#047787"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/slideshow_btn"
