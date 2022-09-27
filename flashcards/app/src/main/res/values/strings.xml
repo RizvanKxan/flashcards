@@ -35,4 +35,5 @@
     <string name="home_btn_train_words_label">Тренировка слов</string>
     <string name="train_deck_button">Тренировать колоду</string>
     <string name="logo">logo</string>
+    <string name="main_menu_exit">Выход</string>
 </resources>
