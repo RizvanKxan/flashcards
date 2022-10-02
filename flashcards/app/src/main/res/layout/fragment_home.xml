@@ -18,6 +18,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/home_btn_train_words"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:backgroundTint="#022B32"
+        android:padding="50dp"
+        android:textSize="20sp"
+        android:text="@string/home_btn_train_words_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_home"
+        tools:ignore="MissingConstraints" />
+
+    <Button
         android:id="@+id/home_btn_cards"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -28,7 +42,7 @@
         android:text="@string/home_btn_cards_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_home"
+        app:layout_constraintTop_toBottomOf="@+id/home_btn_train_words"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -45,17 +59,5 @@
         app:layout_constraintTop_toBottomOf="@+id/home_btn_cards"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/home_btn_train_words"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:backgroundTint="#022B32"
-        android:padding="50dp"
-        android:textSize="20sp"
-        android:text="@string/home_btn_train_words_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_btn_add_deck"
-        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,11 @@ import java.util.concurrent.Executors;
 
 public class NewDecksBank {
     private static NewDecksBank sBank;
+    private FirebaseFirestore db;
+
+    public NewDecksBank(){
+        db = FirebaseFirestore.getInstance();
+    }
 
     public static NewDecksBank get() {
         if(sBank == null) {
@@ -35,7 +40,6 @@ public class NewDecksBank {
     List<Card> list = new ArrayList<>();
     Card card1 = new Card();
     public void getDeck() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection(TABLE_USERS).document(User.get().getId()).collection("deck1").document("card1");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -57,6 +61,9 @@ public class NewDecksBank {
         });
     }
 
+    public void addDeck(NewDeck deck) {
+
+    }
     public List<Card> getDeck2() {
         return list;
     }
