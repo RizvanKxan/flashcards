@@ -73,28 +73,20 @@ public class MainActivity extends AppCompatActivity{
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-//        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-//            @Override
-//            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-//                if(navDestination.getId() == R.id.nav_cards) {
-//
-//                }
-//            }
-//        });
+
         checkAuth();
-        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Card card1 = new Card(0, "word1", "value1");
-        initDate();
-        db.collection(TABLE_USERS).document(user.getId()).collection("deck1").document("card1").set(card1);
-        NewDecksBank.get().getDeck();
-        temp = NewDecksBank.get().getDeck2();
-        List<Card> temp2 = NewDecksBank.get().getDeck2();
+        //initDate();
 
 
     }
 
     private void initDate() {
         user = User.get();
+        Card card1 = new Card(0, "word1", "value1");
+        db.collection(TABLE_USERS).document(user.getId()).collection("deck1").document("card1").set(card1);
+        NewDecksBank.get().getDeck();
+        temp = NewDecksBank.get().getDeck2();
+        List<Card> temp2 = NewDecksBank.get().getDeck2();
 
     }
 
@@ -117,6 +109,9 @@ public class MainActivity extends AppCompatActivity{
                             Toast.LENGTH_LONG)
                     .show();
         }
+
+//        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
     }
 
     @Override
