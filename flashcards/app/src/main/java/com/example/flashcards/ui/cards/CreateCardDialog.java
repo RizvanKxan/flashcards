@@ -16,10 +16,14 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.flashcards.CardsBank;
 import com.example.flashcards.DecksBank;
+import com.example.flashcards.NewCardsBank;
+import com.example.flashcards.NewDecksBank;
 import com.example.flashcards.R;
+import com.example.flashcards.database.entity.Card;
 import com.example.flashcards.database.entity.Deck;
 import com.example.flashcards.database.entity.Decks;
 import com.example.flashcards.database.entity.FlashCard;
+import com.example.flashcards.database.entity.NewDeck;
 import com.example.flashcards.databinding.FragmentCreateCardBinding;
 
 import java.util.ArrayList;
@@ -33,7 +37,7 @@ public class CreateCardDialog extends DialogFragment {
     private EditText mWordEditText;
     private EditText mValueEditText;
     private Button mBtnAdd;
-    private UUID deckId;
+    private String deckName;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,11 +59,14 @@ public class CreateCardDialog extends DialogFragment {
                         .create()
                         .show();
             } else {
-                FlashCard card = new FlashCard(word, value);
-                CardsBank.get().addCard(card);
-                if(deckId != null) {
-                    Deck deck = new Deck(deckId, card.getId());
-                    DecksBank.get().addDeck(deck);
+                //FlashCard card = new FlashCard(word, value);
+
+                //CardsBank.get().addCard(card);
+                if(deckName != null) {
+                    Card card1 = new Card(word, value, deckName);
+                    NewCardsBank.get().addCard(card1,deckName);
+//                    Deck deck = new Deck(deckId, card.getId());
+//                    DecksBank.get().addDeck(deck);
                 }
                 Toast msg = Toast.makeText(getActivity(), R.string.addCardSuccess, Toast.LENGTH_SHORT);
                 msg.show();
@@ -74,7 +81,7 @@ public class CreateCardDialog extends DialogFragment {
         mValueEditText = view.findViewById(R.id.create_card_et_value);
         Spinner spinnerDecks = binding.spinnerDecks;
 
-        List<Decks> decks = DecksBank.get().getDecks();
+        List<NewDeck> decks = NewDecksBank.get().getDeck();
         List<String> decksName = new ArrayList<>();
         decks.forEach(item -> decksName.add(item.getName()));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, decksName);
@@ -85,9 +92,9 @@ public class CreateCardDialog extends DialogFragment {
         spinnerDecks.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String item = (String) adapterView.getItemAtPosition(i);
-                List<Decks> deck = decks.stream().filter(s -> s.getName().equals(item)).collect(Collectors.toList());
-                deckId = deck.get(0).getId();
+                deckName = (String) adapterView.getItemAtPosition(i);
+                //List<NewDeck> deck = decks.stream().filter(s -> s.getName().equals(item)).collect(Collectors.toList());
+                //deckId = deck.get(0).getId();
             }
 
             @Override

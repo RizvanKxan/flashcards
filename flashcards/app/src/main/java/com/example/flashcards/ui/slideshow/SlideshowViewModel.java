@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.flashcards.CardsBank;
 import com.example.flashcards.DecksBank;
+import com.example.flashcards.NewCardsBank;
+import com.example.flashcards.database.entity.Card;
 import com.example.flashcards.database.entity.Deck;
 import com.example.flashcards.database.entity.FlashCard;
 
@@ -17,16 +19,16 @@ import java.util.stream.Collectors;
 public class SlideshowViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
-    private final MutableLiveData<List<FlashCard>> mCards;
-    private MutableLiveData<List<FlashCard>> mCardsDeck;
+    private final MutableLiveData<List<Card>> mCards;
+    private MutableLiveData<List<Card>> mCardsDeck;
     //позиция текущей карточки
     private int currentCardPosition = -1;
-    private UUID currentDeckId;
+    private String currentDeckId;
     private boolean isValueShown = false;
 
     public SlideshowViewModel() {
         mCards = new MutableLiveData<>();
-        List<FlashCard> cards = CardsBank.get().getCards();
+        List<Card> cards = NewCardsBank.get().getCardsList();
         mCards.setValue(cards);
 
         mText = new MutableLiveData<>();
@@ -72,18 +74,14 @@ public class SlideshowViewModel extends ViewModel {
         }
     }
 
-    public void setDeckId(UUID deckId) {
+    public void setDeckId(String deckId) {
         if(deckId != null) {
             currentDeckId = deckId;
-            List<Deck> deck;
-            deck = DecksBank.get().getAllDeckId(deckId);
-            List<UUID> carddd = new ArrayList<>();
-            deck.forEach((x) -> carddd.add(x.getCardID()));
-            List<FlashCard> cards = new ArrayList<>();
-            carddd.forEach((x) -> cards.add(CardsBank.get().getCard(x)));
+            List<Card> cards = new ArrayList<>();
+            cards = NewCardsBank.get().getCardsDeck(deckId);
             mCards.setValue(cards);
         } else {
-            List<FlashCard> cards = CardsBank.get().getCards();
+            List<Card> cards = NewCardsBank.get().getCardsList();
             mCards.setValue(cards);
         }
     }

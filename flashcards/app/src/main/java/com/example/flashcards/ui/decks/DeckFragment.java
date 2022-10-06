@@ -1,6 +1,6 @@
 package com.example.flashcards.ui.decks;
 
-import static com.example.flashcards.ui.cards.CardFragment.CARD_ID;
+import static com.example.flashcards.ui.cards.CardFragment.CARD_NAME;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,9 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashcards.CardsBank;
 import com.example.flashcards.DecksBank;
+import com.example.flashcards.NewCardsBank;
 import com.example.flashcards.R;
+import com.example.flashcards.database.entity.Card;
 import com.example.flashcards.database.entity.Deck;
 import com.example.flashcards.database.entity.FlashCard;
+import com.example.flashcards.database.entity.NewDeck;
 import com.example.flashcards.databinding.FragmentDeckBinding;
 
 import java.util.List;
@@ -27,13 +30,13 @@ import java.util.UUID;
 
 public class DeckFragment extends Fragment {
 
-    public static final String DECK_ID = "deckId";
-    private UUID deckId;
+    public static final String DECK_NAME = "deckName";
+    private String deckName;
 
-    public static DeckFragment newInstance(UUID id) {
+    public static DeckFragment newInstance(String deckName) {
         DeckFragment fragment = new DeckFragment();
         Bundle args = new Bundle();
-        args.putSerializable(DECK_ID, id);
+        args.putSerializable(DECK_NAME, deckName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,7 +46,7 @@ public class DeckFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            deckId = (UUID) getArguments().getSerializable(DECK_ID);
+            deckName = getArguments().getString(DECK_NAME);
         }
     }
 
@@ -62,14 +65,14 @@ public class DeckFragment extends Fragment {
             public void onClick(View view) {
                 Bundle arg = new Bundle();
                 //ToDo cardID может быть null, выяснить почему
-                arg.putSerializable(DECK_ID, deckId);
+                arg.putSerializable(DECK_NAME, deckName);
                 Navigation.findNavController(view).navigate(R.id.action_nav_deck_to_nav_slideshow, arg);
             }
         });
 
-        List<Deck> deck;
-        deck = DecksBank.get().getAllDeckId(deckId);
-        DeckAdapter deckAdapter = new DeckAdapter(deck);
+        List<Card> cardList;
+        cardList = NewCardsBank.get().getCardsDeck(deckName);
+        DeckAdapter deckAdapter = new DeckAdapter(cardList);
         recyclerView.setAdapter(deckAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -78,10 +81,10 @@ public class DeckFragment extends Fragment {
 
 
     private class DeckAdapter extends RecyclerView.Adapter<DeckAdapter.DeckHolder> {
-        private final List<Deck> decks;
+        private final List<Card> cards;
 
-        public DeckAdapter(List<Deck> deck) {
-            decks = deck;
+        public DeckAdapter(List<Card> cardsList) {
+            cards = cardsList;
         }
 
         @NonNull
@@ -93,19 +96,18 @@ public class DeckFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull DeckHolder holder, int position) {
-            Deck deckk = decks.get(position);
-            holder.bind(deckk);
+            Card card = cards.get(position);
+            holder.bind(card);
         }
 
         @Override
         public int getItemCount() {
-            return decks.size();
+            return cards.size();
         }
 
         private class DeckHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             private final TextView mTitleTextView2;
-            FlashCard cardD;
-            private Deck deck;
+            private Card card;
 
             public DeckHolder(LayoutInflater inflater, ViewGroup parent) {
                 super(inflater.inflate(R.layout.item_deck, parent, false));
@@ -114,14 +116,11 @@ public class DeckFragment extends Fragment {
                 mTitleTextView2 = itemView.findViewById(R.id.item_deck_tv_card_id);
             }
 
-            // Метод будет вызываться каждый раз, когда RecyclerView потребует связать
-            // данный объект CardsHolder с объектом конкретной карточки.
-            public void bind(Deck deck) {
-                this.deck = deck;
+            public void bind(Card card) {
+                this.card = card;
 
-                cardD = CardsBank.get().getCard(deck.getCardID());
-                if (cardD != null) {
-                    mTitleTextView2.setText(cardD.getWord());
+                if (card != null) {
+                    mTitleTextView2.setText(card.getWord());
                 } else {
                     mTitleTextView2.setText("Карточка удалена..(");
                 }
@@ -130,13 +129,13 @@ public class DeckFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                if (cardD != null) {
-                    notifyItemChanged(getAdapterPosition());
-                    Bundle arg = new Bundle();
-                    //ToDo cardID может быть null, выяснить почему
-                    arg.putSerializable(CARD_ID, cardD.getId());
-                    Navigation.findNavController(view).navigate(R.id.action_nav_deck_to_nav_card_fragment, arg);
-                }
+//                if (cardD != null) {
+//                    notifyItemChanged(getAdapterPosition());
+//                    Bundle arg = new Bundle();
+//                    //ToDo cardID может быть null, выяснить почему
+//                    arg.putSerializable(CARD_NAME, cardD.getWord());
+//                    Navigation.findNavController(view).navigate(R.id.action_nav_deck_to_nav_card_fragment, arg);
+                //}
             }
         }
     }

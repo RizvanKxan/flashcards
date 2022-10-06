@@ -2,24 +2,16 @@ package com.example.flashcards.database.entity;
 
 public class Card {
 
-    private long id;
     private String word;
     private String value;
+    private String deckName;
 
     public Card(){};
 
-    public Card(long id, String word, String value) {
-        this.id = id;
+    public Card(String word, String value, String deckName) {
         this.word = word;
         this.value = value;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.deckName = deckName;
     }
 
     public String getWord() {
@@ -36,5 +28,13 @@ public class Card {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getDeckName() {
+        return deckName;
+    }
+
+    public void setDeckName(String deckName) {
+        this.deckName = deckName;
     }
 }

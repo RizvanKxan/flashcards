@@ -15,9 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.flashcards.DecksBank;
+import com.example.flashcards.NewDecksBank;
 import com.example.flashcards.R;
 import com.example.flashcards.database.entity.Deck;
 import com.example.flashcards.database.entity.Decks;
+import com.example.flashcards.database.entity.NewDeck;
 import com.example.flashcards.databinding.FragmentCreateDeckBinding;
 
 public class CreateDeckDialog extends DialogFragment {
@@ -56,8 +58,8 @@ public class CreateDeckDialog extends DialogFragment {
                             .create()
                             .show();
                 } else {
-                    Decks decks = new Decks(nameDeck);
-                    DecksBank.get().addDecks(decks);
+                    NewDeck deck = new NewDeck(nameDeck);
+                    NewDecksBank.get().addDeck(deck);
                     Toast msg = Toast.makeText(getActivity(), R.string.addDeckSuccess, Toast.LENGTH_SHORT);
                     msg.show();
                     dismiss();

@@ -1,10 +1,12 @@
 package com.example.flashcards.ui.cards;
 
-import static com.example.flashcards.ui.cards.CardFragment.CARD_ID;
+import static com.example.flashcards.ui.cards.CardFragment.CARD_NAME;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +22,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashcards.CardsBank;
+import com.example.flashcards.NewCardsBank;
+import com.example.flashcards.NewDecksBank;
 import com.example.flashcards.R;
+import com.example.flashcards.database.entity.Card;
 import com.example.flashcards.database.entity.FlashCard;
+import com.example.flashcards.database.entity.NewDeck;
 import com.example.flashcards.databinding.FragmentCardListBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardsListFragment extends Fragment {
+public class CardsListFragment extends Fragment{
 
     public RecyclerView mCardsRecyclerView;
     private FragmentCardListBinding binding;
@@ -47,17 +53,18 @@ public class CardsListFragment extends Fragment {
 
         mCardsRecyclerView = binding.cardsRecyclerView;
         mCardsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        List<FlashCard> cards = CardsBank.get().getCards();
+        List<Card> cards = NewCardsBank.get().getCardsList();
         cardsAdapter = new CardsAdapter(cards);
         mCardsRecyclerView.setAdapter(cardsAdapter);
+        cardsAdapter.notifyDataSetChanged();
         return view;
     }
 
     public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.CardsHolder> {
 
-        private List<FlashCard> mCards;
+        private List<Card> mCards;
 
-        public CardsAdapter(List<FlashCard> cards) {
+        public CardsAdapter(List<Card> cards) {
             mCards = cards;
         }
 
@@ -70,7 +77,7 @@ public class CardsListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull CardsHolder holder, int position) {
-            FlashCard card = mCards.get(position);
+            Card card = mCards.get(position);
             holder.bind(card);
         }
 
@@ -79,14 +86,10 @@ public class CardsListFragment extends Fragment {
             return mCards.size();
         }
 
-        public void setFlashCards(List<FlashCard> cards) {
-            mCards = cards;
-        }
-
         public class CardsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
             private final TextView mTitleTextView;
-            private FlashCard mCard;
+            private Card mCard;
             private ImageButton deleteCard;
 
             public CardsHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -97,13 +100,13 @@ public class CardsListFragment extends Fragment {
                 deleteCard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        CardsBank.get().deleteCard(mCard);
+                        NewCardsBank.get().deleteCard(mCard);
                         notifyDataSetChanged();
                     }
                 });
             }
 
-            public void bind(FlashCard card) {
+            public void bind(Card card) {
                 mCard = card;
                 mTitleTextView.setText(card.getWord());
 
@@ -111,9 +114,14 @@ public class CardsListFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Bundle arg = new Bundle();
-            arg.putSerializable(CARD_ID, mCard.getId());
-            Navigation.findNavController(view).navigate(R.id.action_nav_cards_to_nav_card_fragment, arg);
+                try {
+                    notifyDataSetChanged();
+                    Bundle arg = new Bundle();
+                    arg.putSerializable(CARD_NAME, mCard.getWord());
+                    Navigation.findNavController(view).navigate(R.id.action_nav_cards_to_nav_card_fragment, arg);
+                } catch (Exception exception) {
+                    Log.e("error", exception.getMessage());
+                };
             }
         }
     }

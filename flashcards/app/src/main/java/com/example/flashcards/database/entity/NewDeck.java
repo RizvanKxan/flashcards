@@ -13,22 +13,13 @@ import java.util.UUID;
 
 public class NewDeck {
 
-    public static long counterIdCards = 0;
-    private long id;
     private String name;
 
-    public NewDeck(long counterIdCards, long id, String name) {
-        NewDeck.counterIdCards = counterIdCards;
-        this.id = id;
+    public NewDeck() {
+    }
+
+    public NewDeck(String name) {
         this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

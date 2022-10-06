@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashcards.database.entity.Card;
+import com.example.flashcards.database.entity.FlashCard;
 import com.example.flashcards.database.entity.NewDeck;
 import com.example.flashcards.database.entity.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,63 +23,90 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
-public class NewDecksBank {
-    private static NewDecksBank sBank;
+public class NewCardsBank {
+    private static NewCardsBank sBank;
     private FirebaseFirestore db;
     private final String TABLE_USERS = "users";
     private final String USER_ID;
     private final String TABLE_DECKS = "decks";
-    private List<NewDeck> deckList;
+    private final String TABLE_CARDS = "cards";
+    private List<Card> cardsList;
 
-    public NewDecksBank(){
+    public NewCardsBank(){
         db = FirebaseFirestore.getInstance();
         USER_ID = User.get().getId();
         openBank();
     }
 
-    public static NewDecksBank get() {
+    public static NewCardsBank get() {
         if(sBank == null) {
-            sBank = new NewDecksBank();
+            sBank = new NewCardsBank();
         }
         return sBank;
     }
 
-    public void getAllDeck() {
-        db.collection(TABLE_USERS).document(USER_ID).collection(TABLE_DECKS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void getAllCard() {
+        db.collection(TABLE_USERS).document(USER_ID).collection(TABLE_CARDS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
-                    deckList.clear();
+                    cardsList.clear();
                     for (QueryDocumentSnapshot dc: task.getResult()
-                         ) {
-                        deckList.add(dc.toObject(NewDeck.class));
+                    ) {
+                        cardsList.add(dc.toObject(Card.class));
                     }
                 }
             }
         });
     }
 
-    public List<NewDeck> getDeck() {
-        return deckList;
+    public List<Card> getCardsList() {
+        return cardsList;
     }
 
-    public void addDeck(NewDeck deck) {
-        deckList.add(deck);
+    public List<Card> getCardsDeck(String deckName) {
+        List<Card> result;
+        result = cardsList.stream().filter(card -> card.getDeckName().equals(deckName)).collect(Collectors.toList());
+        return result;
+    }
+
+
+    public void addCard(Card card, String deckName) {
+        cardsList.add(card);
         db.collection(TABLE_USERS)
                 .document(USER_ID)
-                .collection(TABLE_DECKS)
-                .document(deck.getName()).set(deck);
+                .collection(TABLE_CARDS)
+                .document(card.getWord())
+                .set(card);
+
     }
 
-    public void deleteDecks(NewDeck deck) {
-        db.collection(TABLE_USERS).document(USER_ID).collection(TABLE_DECKS).document(deck.getName()).delete();
+    public void deleteCard(Card card) {
+        cardsList.remove(card);
+        db.collection(TABLE_USERS)
+                .document(USER_ID)
+                .collection(TABLE_CARDS)
+                .document(card.getWord())
+                .delete();
     }
 
     public void openBank() {
-        deckList = new ArrayList<NewDeck>();
-        getAllDeck();
+        cardsList = new ArrayList<Card>();
+        getAllCard();
+    }
+
+    public Card getCard(String cardName) {
+        Card card = new Card();
+        List<Card> newList = cardsList.stream().filter(value -> value.getWord().equals(cardName)).collect(Collectors.toList());
+        if(newList.size() > 0) {
+            card = newList.get(0);
+        }
+        return card;
     }
 }

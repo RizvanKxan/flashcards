@@ -1,7 +1,8 @@
 package com.example.flashcards.ui.decks;
 
-import static com.example.flashcards.ui.decks.DeckFragment.DECK_ID;
+import static com.example.flashcards.ui.decks.DeckFragment.DECK_NAME;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,16 +19,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashcards.DecksBank;
+import com.example.flashcards.MainActivity;
+import com.example.flashcards.NewDecksBank;
 import com.example.flashcards.R;
 import com.example.flashcards.database.entity.Decks;
+import com.example.flashcards.database.entity.NewDeck;
 import com.example.flashcards.databinding.FragmentDecksBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DecksFragment extends Fragment {
 
     public RecyclerView recyclerView;
     private FragmentDecksBinding binding;
+    public DecksAdapter decksAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,11 +46,10 @@ public class DecksFragment extends Fragment {
 
         recyclerView = binding.decksRV;
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        List<Decks> decks;
-        decks = DecksBank.get().getDecks();
-        DecksAdapter decksAdapter = new DecksAdapter(decks);
-        recyclerView.setAdapter(decksAdapter);
 
+        List<NewDeck> decks1 = NewDecksBank.get().getDeck();
+        decksAdapter = new DecksAdapter(decks1);
+        recyclerView.setAdapter(decksAdapter);
         final TextView textView = binding.textDecks;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
@@ -55,12 +60,11 @@ public class DecksFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
     public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DecksHolder> {
-        private List<Decks> decks;
+        public List<NewDeck> decks;
         private int selectedPos = -1;
 
-        public DecksAdapter(List<Decks> decks) {
+        public DecksAdapter(List<NewDeck> decks) {
             this.decks = decks;
         }
 
@@ -73,7 +77,7 @@ public class DecksFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull DecksHolder holder, int position) {
-            Decks deck = decks.get(position);
+            NewDeck deck = decks.get(position);
             holder.bind(deck);
         }
 
@@ -86,7 +90,7 @@ public class DecksFragment extends Fragment {
             Context context;
             private TextView mTitleTextView;
             private ImageButton deleteDeck;
-            private Decks decks;
+            private NewDeck deck;
 
             public DecksHolder(LayoutInflater inflater, ViewGroup parent) {
                 super(inflater.inflate(R.layout.item_card, parent, false));
@@ -97,14 +101,15 @@ public class DecksFragment extends Fragment {
                 deleteDeck.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DecksBank.get().deleteDecks(decks);
+                        NewDecksBank.get().deleteDecks(deck);
+                        decks.remove(deck);
                         notifyDataSetChanged();
                     }
                 });
             }
 
-            public void bind(Decks decks) {
-                this.decks = decks;
+            public void bind(NewDeck decks) {
+                this.deck = decks;
                 mTitleTextView.setText(decks.getName());
             }
 
@@ -114,8 +119,8 @@ public class DecksFragment extends Fragment {
                 selectedPos = getLayoutPosition();
                 notifyItemChanged(selectedPos);
                 Bundle arg = new Bundle();
-                arg.putSerializable(DECK_ID, decks.getId());
-                //DeckFragment fragment = DeckFragment.newInstance(decks.getId());
+                arg.putSerializable(DECK_NAME, deck.getName());
+                DeckFragment fragment = DeckFragment.newInstance(deck.getName());
                 Navigation
                         .findNavController(view)
                         .navigate(R.id.action_nav_decks_to_nav_deck, arg);

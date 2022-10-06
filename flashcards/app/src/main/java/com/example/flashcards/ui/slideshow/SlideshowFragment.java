@@ -1,6 +1,7 @@
 package com.example.flashcards.ui.slideshow;
 
-import static com.example.flashcards.ui.decks.DeckFragment.DECK_ID;
+
+import static com.example.flashcards.ui.decks.DeckFragment.DECK_NAME;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -29,14 +30,14 @@ import java.util.UUID;
 
 public class SlideshowFragment extends Fragment {
     private FragmentSlideshowBinding binding;
-    private UUID deckId;
+    private String deckId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            deckId = (UUID) getArguments().getSerializable(DECK_ID);
+            deckId = getArguments().getString(DECK_NAME);
         }
     }
 

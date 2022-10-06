@@ -8,21 +8,21 @@ import java.util.UUID;
 public class User {
     public static long counterIdDecks = 0;
     private static User user;
+
     private String id;
 
     public static User get() {
         if(user == null) {
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            user = new User(userId);
-
+            user = new User();
         }
         return user;
-    }
-    private User(String id) {
-        this.id = id;
     }
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

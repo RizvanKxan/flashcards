@@ -75,18 +75,7 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupWithNavController(navigationView, navController);
 
         checkAuth();
-        //initDate();
 
-
-    }
-
-    private void initDate() {
-        user = User.get();
-        Card card1 = new Card(0, "word1", "value1");
-        db.collection(TABLE_USERS).document(user.getId()).collection("deck1").document("card1").set(card1);
-        NewDecksBank.get().getDeck();
-        temp = NewDecksBank.get().getDeck2();
-        List<Card> temp2 = NewDecksBank.get().getDeck2();
 
     }
 
@@ -101,7 +90,6 @@ public class MainActivity extends AppCompatActivity{
             );
         } else {
             //Пользователь уже зашёл
-
             Toast.makeText(this,
                             "Welcome " + FirebaseAuth.getInstance()
                                     .getCurrentUser()
@@ -109,9 +97,9 @@ public class MainActivity extends AppCompatActivity{
                             Toast.LENGTH_LONG)
                     .show();
         }
-
-//        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        user = User.get();
+        user.setId(userId);
     }
 
     @Override
@@ -139,9 +127,17 @@ public class MainActivity extends AppCompatActivity{
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        NewDecksBank.get().openBank();
+        NewCardsBank.get().openBank();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         DecksBank.get().saveBank();
+        NewDecksBank.get().openBank();
         CardsBank.get().saveBank();
     }
 
