@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="200dp"
-        android:background="@drawable/gradient"
+        android:background="#0792B5"
         android:text="" >
 
 
@@ -28,7 +28,7 @@
         android:id="@+id/top_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient"
+        android:background="#0792B5"
         android:text=""
         tools:layout_editor_absoluteX="60dp"
         tools:layout_editor_absoluteY="150dp">
@@ -39,8 +39,9 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text=""
+            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
     </FrameLayout>
 
@@ -51,9 +52,10 @@
         app:layout_constraintTop_toBottomOf="@+id/top_card"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:backgroundTint="#047787"
+        android:backgroundTint="#0792B5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#212223"
         android:text="@string/slideshow_btn"
         android:textSize="20sp"/>
 

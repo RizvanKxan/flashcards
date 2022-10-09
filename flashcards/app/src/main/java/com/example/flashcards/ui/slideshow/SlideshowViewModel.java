@@ -32,7 +32,7 @@ public class SlideshowViewModel extends ViewModel {
         mCards.setValue(cards);
 
         mText = new MutableLiveData<>();
-        mText.setValue("Смахните карту в одну из сторон.");
+        mText.setValue("Смахните влево, если не помните значение. Или вправо, если помните.");
     }
 
     public boolean isValueShown() {

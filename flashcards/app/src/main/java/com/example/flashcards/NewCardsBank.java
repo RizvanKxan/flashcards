@@ -1,5 +1,6 @@
 package com.example.flashcards;
 
+import static com.example.flashcards.MainActivity.GLOBAL_DECKS;
 import static com.example.flashcards.MainActivity.TABLE_USERS;
 
 import androidx.annotation.NonNull;
@@ -36,7 +37,10 @@ public class NewCardsBank {
     private final String USER_ID;
     private final String TABLE_DECKS = "decks";
     private final String TABLE_CARDS = "cards";
+    private final String GLOBAL_CARDS = "global_cards";
+
     private List<Card> cardsList;
+    private List<Card> cardsGlobalList;
 
     public NewCardsBank(){
         db = FirebaseFirestore.getInstance();
@@ -108,5 +112,40 @@ public class NewCardsBank {
             card = newList.get(0);
         }
         return card;
+    }
+
+    public void sendCardsDeckToGlobal(String deckName) {
+        List<Card> cardsDeck;
+        cardsDeck = getCardsDeck(deckName);
+        cardsDeck.forEach(card -> {
+            db.collection(GLOBAL_CARDS)
+                    .document()
+                    .set(card);
+        });
+
+    }
+
+    public List<Card> getGlobalCardsDeck() {
+        return cardsGlobalList;
+    }
+
+    public void loadGlobalCards(String deckName, String deckUserId) {
+        cardsGlobalList = new ArrayList<>();
+        db.collection(GLOBAL_CARDS)
+                .whereEqualTo("deckName", deckName)
+                .whereEqualTo("userID", deckUserId)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    cardsGlobalList.clear();
+                    for (QueryDocumentSnapshot dc: task.getResult()
+                    ) {
+                        cardsGlobalList.add(dc.toObject(Card.class));
+                    }
+                }
+            }
+        });
+
     }
 }

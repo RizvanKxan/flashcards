@@ -6,7 +6,6 @@
     <string name="nav_header_subtitle">бета-версия</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Настройки</string>
-
     <string name="menu_home">Главная</string>
     <string name="menu_decks">Колоды</string>
     <string name="menu_slideshow">Слайдшоу</string>
@@ -25,8 +24,6 @@
     <string name="addCardSuccess">Карточка успешно добавлена!</string>
     <string name="addDeckSuccess">Колода успешно добавлена!</string>
     <string name="editCardSuccess">Карточка успешно обновлена!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="slideshow_btn">Показать значение</string>
     <string name="fragment_create_deck_et_hint">Введите название колоды…</string>
     <string name="item_card_delete_card">Удалить карточку</string>
@@ -36,4 +33,8 @@
     <string name="train_deck_button">Тренировать колоду</string>
     <string name="logo">logo</string>
     <string name="main_menu_exit">Выход</string>
+    <string name="fragment_deck_btn_send_name">Поделиться</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

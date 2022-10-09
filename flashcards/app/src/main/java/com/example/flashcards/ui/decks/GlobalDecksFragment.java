@@ -1,10 +1,6 @@
 package com.example.flashcards.ui.decks;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,16 +8,23 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.example.flashcards.NewDecksBank;
+import com.example.flashcards.R;
 import com.example.flashcards.database.entity.NewDeck;
 import com.example.flashcards.databinding.FragmentDecksBinding;
+import com.example.flashcards.databinding.FragmentGlobalDecksBinding;
 
 import java.util.List;
 
-public class DecksFragment extends Fragment {
+public class GlobalDecksFragment extends Fragment {
 
+    private FragmentGlobalDecksBinding binding;
     public RecyclerView recyclerView;
-    private FragmentDecksBinding binding;
     public DecksAdapter decksAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -30,17 +33,14 @@ public class DecksFragment extends Fragment {
         DecksViewModel galleryViewModel =
                 new ViewModelProvider(this).get(DecksViewModel.class);
 
-        binding = FragmentDecksBinding.inflate(inflater, container, false);
+        binding = FragmentGlobalDecksBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        recyclerView = binding.decksRV;
+        recyclerView = binding.globalCardsRecycler;
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        List<NewDeck> decks1 = NewDecksBank.get().getDeck();
-        decksAdapter = new DecksAdapter(decks1);
+        List<NewDeck> decks1 = NewDecksBank.get().getGlobalDeck();
+        decksAdapter = new DecksAdapter(decks1, true);
         recyclerView.setAdapter(decksAdapter);
-        final TextView textView = binding.textDecks;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
@@ -49,5 +49,4 @@ public class DecksFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 }

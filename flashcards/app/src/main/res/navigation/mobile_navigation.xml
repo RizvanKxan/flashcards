@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_slideshow"
             app:destination="@id/nav_slideshow" />
+        <action
+            android:id="@+id/action_nav_home_to_globalDecksFragment"
+            app:destination="@id/globalDecksFragment" />
     </fragment>
 
     <fragment
@@ -94,5 +97,14 @@
             android:name="cardName"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/globalDecksFragment"
+        android:name="com.example.flashcards.ui.decks.GlobalDecksFragment"
+        android:label="fragment_global_decks"
+        tools:layout="@layout/fragment_global_decks" >
+        <action
+            android:id="@+id/action_globalDecksFragment_to_nav_deck"
+            app:destination="@id/nav_deck" />
+    </fragment>
 
 </navigation>

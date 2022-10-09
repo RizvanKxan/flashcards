@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity{
 
     private static final int SIGN_IN_REQUEST_CODE = 0;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private User user;
     List<Card> temp = new ArrayList<>();
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -98,8 +97,7 @@ public class MainActivity extends AppCompatActivity{
                     .show();
         }
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        user = User.get();
-        user.setId(userId);
+        User.get().setId(userId);
     }
 
     @Override

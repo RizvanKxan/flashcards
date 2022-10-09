@@ -17,6 +17,15 @@
         android:padding="10dp"
         android:text="@string/train_deck_button" />
 
+    <Button
+        android:id="@+id/btnSendDeck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#047787"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:text="@string/fragment_deck_btn_send_name" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_deck_rv"
         android:layout_width="match_parent"

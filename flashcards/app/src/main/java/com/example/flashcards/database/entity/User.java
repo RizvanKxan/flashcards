@@ -6,9 +6,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.UUID;
 
 public class User {
-    public static long counterIdDecks = 0;
     private static User user;
-
     private String id;
 
     public static User get() {

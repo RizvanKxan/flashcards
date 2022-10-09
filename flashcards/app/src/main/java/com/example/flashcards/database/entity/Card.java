@@ -5,6 +5,7 @@ public class Card {
     private String word;
     private String value;
     private String deckName;
+    private String userID;
 
     public Card(){};
 
@@ -12,6 +13,7 @@ public class Card {
         this.word = word;
         this.value = value;
         this.deckName = deckName;
+        userID = User.get().getId();
     }
 
     public String getWord() {
@@ -36,5 +38,13 @@ public class Card {
 
     public void setDeckName(String deckName) {
         this.deckName = deckName;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

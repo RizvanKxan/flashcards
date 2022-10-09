@@ -13,13 +13,18 @@ import java.util.UUID;
 
 public class NewDeck {
 
+    public boolean isGlobal;
     private String name;
+
+    private String userID;
 
     public NewDeck() {
     }
 
     public NewDeck(String name) {
         this.name = name;
+        isGlobal = false;
+        userID = User.get().getId();
     }
 
     public String getName() {
@@ -28,5 +33,13 @@ public class NewDeck {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

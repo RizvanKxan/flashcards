@@ -28,6 +28,7 @@ import com.example.flashcards.ui.cards.CreateCardDialog;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    public static final String IS_GLOBAL_MODE = "isGlobalMode";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
         Button btnAddCard = binding.homeBtnCards;
         Button btnAddDeck = binding.homeBtnAddDeck;
         Button btnTraining = binding.homeBtnTrainWords;
+        Button btnGetGlobalCard = binding.homeBtnGetGlobalCard;
 
         btnAddCard.setOnClickListener(view -> {
             Navigation
@@ -57,6 +59,12 @@ public class HomeFragment extends Fragment {
                 Navigation
                         .findNavController(view)
                         .navigate(R.id.action_nav_home_to_nav_slideshow));
+        btnGetGlobalCard.setOnClickListener(view -> {
+            Navigation
+                    .findNavController(view)
+                    .navigate(R.id.action_nav_home_to_globalDecksFragment);
+                });
+
         return root;
     }
 

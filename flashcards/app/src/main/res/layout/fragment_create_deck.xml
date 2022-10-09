@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_gradient"
+    android:background="#044D60"
     tools:context=".ui.decks.CreateDeckDialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/fragment_create_deck_et_hint"
-            android:textColor="@color/white"
+            android:textColor="#DACECE"
             android:textColorHint="#B5AFAF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

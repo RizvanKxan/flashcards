@@ -1,63 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_background_gradient"
+    android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
     <ImageView
         android:id="@+id/logo_home"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
         android:background="@drawable/home_logo"
-        android:contentDescription="@string/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:contentDescription="@string/logo" />
 
     <Button
         android:id="@+id/home_btn_train_words"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:backgroundTint="#022B32"
-        android:padding="50dp"
-        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:backgroundTint="#035461"
         android:text="@string/home_btn_train_words_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_home"
+        android:textSize="25sp"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/home_btn_cards"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:backgroundTint="#047787"
-        android:padding="50dp"
-        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:backgroundTint="#03505A"
         android:text="@string/home_btn_cards_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_btn_train_words"
+        android:textSize="25sp"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/home_btn_add_deck"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:backgroundTint="#083C43"
-        android:padding="50dp"
-        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:backgroundTint="#013B43"
         android:text="@string/home_btn_add_deck"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_btn_cards"
+        android:textSize="25sp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/home_btn_get_global_card"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:backgroundTint="#012F35"
+        android:text="Получить колоды"
+        android:textSize="25sp"
         tools:ignore="MissingConstraints" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

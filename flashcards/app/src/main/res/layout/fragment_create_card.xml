@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_gradient"
+    android:background="#044D60"
     tools:context=".ui.cards.CreateCardDialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/create_card_et_word_hint"
-            android:textColor="@color/white"
+            android:textColor="#DACECE"
             android:textColorHint="#B5AFAF"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:hint="@string/create_card_et_value_hint"
-            android:textColor="@color/white"
+            android:textColor="#DACECE"
             android:textColorHint="#B5AFAF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"
             android:backgroundTint="@color/yellow"
-            android:popupBackground="@color/teal_700"
+            android:popupBackground="#09BAB9"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/create_card_et_value" />

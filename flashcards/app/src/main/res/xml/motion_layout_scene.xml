@@ -170,8 +170,8 @@
         <Constraint android:id="@+id/passIcon">
 
             <Layout
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 motion:layout_constraintBottom_toBottomOf="@id/top_card"
                 motion:layout_constraintEnd_toEndOf="@id/top_card"
                 motion:layout_constraintStart_toStartOf="@id/top_card"
@@ -211,8 +211,8 @@
         <Constraint android:id="@+id/likeIcon">
 
             <Layout
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 motion:layout_constraintBottom_toBottomOf="@id/top_card"
                 motion:layout_constraintEnd_toEndOf="@id/top_card"
                 motion:layout_constraintStart_toStartOf="@id/top_card"

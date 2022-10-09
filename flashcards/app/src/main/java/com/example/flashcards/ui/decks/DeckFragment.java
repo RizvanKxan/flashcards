@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flashcards.CardsBank;
 import com.example.flashcards.DecksBank;
 import com.example.flashcards.NewCardsBank;
+import com.example.flashcards.NewDecksBank;
 import com.example.flashcards.R;
 import com.example.flashcards.database.entity.Card;
 import com.example.flashcards.database.entity.Deck;
@@ -25,13 +28,19 @@ import com.example.flashcards.database.entity.FlashCard;
 import com.example.flashcards.database.entity.NewDeck;
 import com.example.flashcards.databinding.FragmentDeckBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class DeckFragment extends Fragment {
 
     public static final String DECK_NAME = "deckName";
+    public static final String DECK_GLOBAL = "isGlobalDeck";
+    public static final String USER_ID = "deckUserId";
+    private Boolean isGlobal;
     private String deckName;
+    private String deckUserId;
+    private NewDeck deck;
 
     public static DeckFragment newInstance(String deckName) {
         DeckFragment fragment = new DeckFragment();
@@ -47,6 +56,14 @@ public class DeckFragment extends Fragment {
 
         if (getArguments() != null) {
             deckName = getArguments().getString(DECK_NAME);
+            isGlobal = getArguments().getBoolean(DECK_GLOBAL);
+            deckUserId = getArguments().getString(USER_ID);
+            if (isGlobal) {
+                NewCardsBank.get().loadGlobalCards(deckName, deckUserId);
+            } else {
+                deck = NewDecksBank.get().getDeckByName(deckName);
+
+            }
         }
     }
 
@@ -59,6 +76,7 @@ public class DeckFragment extends Fragment {
 
         RecyclerView recyclerView = binding.fragmentDeckRv;
         Button btnTrainDeck = binding.btnTrainDeck;
+        Button btnSendDeck = binding.btnSendDeck;
 
         btnTrainDeck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +88,34 @@ public class DeckFragment extends Fragment {
             }
         });
 
-        List<Card> cardList;
-        cardList = NewCardsBank.get().getCardsDeck(deckName);
+        btnSendDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(deck != null) {
+                    if(!deck.isGlobal) {
+                        NewDecksBank.get().sendDeckToGlobal(deckName);
+                        NewCardsBank.get().sendCardsDeckToGlobal(deckName);
+                        NewDecksBank.get().deleteDecks(deck);
+                        deck.isGlobal = true;
+                        NewDecksBank.get().addDeck(deck);
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle(R.string.attention)
+                                .setMessage("Вы уже делились колодой.")
+                                .setPositiveButton(R.string.accept, null)
+                                .create()
+                                .show();
+                    }
+                }
+            }
+        });
+
+        List<Card> cardList = new ArrayList<>();
+        if(isGlobal) {
+            cardList = NewCardsBank.get().getGlobalCardsDeck();
+        } else {
+            cardList = NewCardsBank.get().getCardsDeck(deckName);
+        }
         DeckAdapter deckAdapter = new DeckAdapter(cardList);
         recyclerView.setAdapter(deckAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

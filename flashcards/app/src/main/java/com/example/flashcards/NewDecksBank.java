@@ -24,6 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class NewDecksBank {
     private static NewDecksBank sBank;
@@ -31,7 +32,9 @@ public class NewDecksBank {
     private final String TABLE_USERS = "users";
     private final String USER_ID;
     private final String TABLE_DECKS = "decks";
+    private final String TABLE_GLOBAL_DECKS = "global_decks";
     private List<NewDeck> deckList;
+    private List<NewDeck> deckGlobalList;
 
     public NewDecksBank(){
         db = FirebaseFirestore.getInstance();
@@ -61,8 +64,27 @@ public class NewDecksBank {
         });
     }
 
+    public void loadGlobalDeck() {
+        db.collection(TABLE_GLOBAL_DECKS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    deckGlobalList.clear();
+                    for (QueryDocumentSnapshot dc: task.getResult()
+                    ) {
+                        deckGlobalList.add(dc.toObject(NewDeck.class));
+                    }
+                }
+            }
+        });
+    }
+
     public List<NewDeck> getDeck() {
         return deckList;
+    }
+
+    public List<NewDeck> getGlobalDeck() {
+        return deckGlobalList;
     }
 
     public void addDeck(NewDeck deck) {
@@ -77,8 +99,18 @@ public class NewDecksBank {
         db.collection(TABLE_USERS).document(USER_ID).collection(TABLE_DECKS).document(deck.getName()).delete();
     }
 
+    public void sendDeckToGlobal(String nameDeck) {
+        NewDeck deck = getDeckByName(nameDeck);
+        db.collection(TABLE_GLOBAL_DECKS).document().set(deck);
+    }
+
+    public NewDeck getDeckByName(String nameDeck) {
+        return deckList.stream().filter(d -> d.getName().equals(nameDeck)).collect(Collectors.toList()).get(0);
+    }
     public void openBank() {
         deckList = new ArrayList<NewDeck>();
+        deckGlobalList = new ArrayList<>();
         getAllDeck();
+        loadGlobalDeck();
     }
 }
