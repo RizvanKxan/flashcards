@@ -9,9 +9,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/create_card_tv_word_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/word_or_question"
+            android:textAlignment="center"
+            android:background="#038E79"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/create_card_et_word"
@@ -23,21 +35,45 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/create_card_tv_word_label" />
+
+        <TextView
+            android:id="@+id/create_card_tv_value_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/value_or_answer"
+            android:textAlignment="center"
+            android:background="#038E79"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_card_et_word"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/create_card_et_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:hint="@string/create_card_et_value_hint"
             android:textColor="#DACECE"
             android:textColorHint="#B5AFAF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_card_et_word" />
+            app:layout_constraintTop_toBottomOf="@id/create_card_tv_value_label" />
 
+        <TextView
+            android:id="@+id/create_card_tv_deck_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_deck"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#038E79"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_card_et_value"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
 
         <Spinner
             android:id="@+id/spinnerDecks"
@@ -49,7 +85,7 @@
             android:popupBackground="#09BAB9"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_card_et_value" />
+            app:layout_constraintTop_toBottomOf="@id/create_card_tv_deck_label" />
 
         <Button
             android:id="@+id/btnAdd"
@@ -60,6 +96,7 @@
             android:layout_marginEnd="10dp"
             android:backgroundTint="#047787"
             android:text="@string/btn_add"
+            android:textSize="@dimen/fui_field_padding_vert"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btnCancel"
@@ -74,11 +111,12 @@
             android:layout_marginEnd="20dp"
             android:backgroundTint="#047787"
             android:text="@string/btn_cancel"
+            android:textSize="@dimen/fui_field_padding_vert"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/btnAdd"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinnerDecks" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

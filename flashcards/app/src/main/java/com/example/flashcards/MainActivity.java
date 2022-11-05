@@ -97,7 +97,9 @@ public class MainActivity extends AppCompatActivity{
                     .show();
         }
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         User.get().setId(userId);
+        User.get().setName(userName);
     }
 
     @Override

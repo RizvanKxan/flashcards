@@ -55,6 +55,12 @@ public class NewCardsBank {
         return sBank;
     }
 
+    public void regUserName() {
+        Map<String, String> userName = new HashMap<>();
+        userName.put("user_name", User.get().getName());
+        db.collection(TABLE_USERS).document(USER_ID).set(userName);
+    }
+
     public void getAllCard() {
         db.collection(TABLE_USERS).document(USER_ID).collection(TABLE_CARDS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -81,7 +87,7 @@ public class NewCardsBank {
     }
 
 
-    public void addCard(Card card, String deckName) {
+    public void addCard(Card card) {
         cardsList.add(card);
         db.collection(TABLE_USERS)
                 .document(USER_ID)
@@ -101,8 +107,10 @@ public class NewCardsBank {
     }
 
     public void openBank() {
-        cardsList = new ArrayList<Card>();
+        cardsList = new ArrayList<>();
+        cardsGlobalList = new ArrayList<>();
         getAllCard();
+        regUserName();
     }
 
     public Card getCard(String cardName) {
@@ -129,10 +137,8 @@ public class NewCardsBank {
         return cardsGlobalList;
     }
 
-    public void loadGlobalCards(String deckName, String deckUserId) {
-        cardsGlobalList = new ArrayList<>();
+    public void loadGlobalCards(String deckUserId) {
         db.collection(GLOBAL_CARDS)
-                .whereEqualTo("deckName", deckName)
                 .whereEqualTo("userID", deckUserId)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

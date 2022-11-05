@@ -16,4 +16,5 @@
         android:textAlignment="center"
         android:textSize="30sp"
         android:text="item_deck_tv_card_name"/>
+
 </androidx.cardview.widget.CardView>

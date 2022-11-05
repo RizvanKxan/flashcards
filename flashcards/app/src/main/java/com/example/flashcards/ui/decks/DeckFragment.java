@@ -26,11 +26,13 @@ import com.example.flashcards.database.entity.Card;
 import com.example.flashcards.database.entity.Deck;
 import com.example.flashcards.database.entity.FlashCard;
 import com.example.flashcards.database.entity.NewDeck;
+import com.example.flashcards.database.entity.User;
 import com.example.flashcards.databinding.FragmentDeckBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class DeckFragment extends Fragment {
 
@@ -40,6 +42,7 @@ public class DeckFragment extends Fragment {
     private Boolean isGlobal;
     private String deckName;
     private String deckUserId;
+    private List<Card> cardList;
     private NewDeck deck;
 
     public static DeckFragment newInstance(String deckName) {
@@ -59,7 +62,7 @@ public class DeckFragment extends Fragment {
             isGlobal = getArguments().getBoolean(DECK_GLOBAL);
             deckUserId = getArguments().getString(USER_ID);
             if (isGlobal) {
-                NewCardsBank.get().loadGlobalCards(deckName, deckUserId);
+                NewCardsBank.get().loadGlobalCards(deckUserId);
             } else {
                 deck = NewDecksBank.get().getDeckByName(deckName);
 
@@ -77,6 +80,11 @@ public class DeckFragment extends Fragment {
         RecyclerView recyclerView = binding.fragmentDeckRv;
         Button btnTrainDeck = binding.btnTrainDeck;
         Button btnSendDeck = binding.btnSendDeck;
+        if(isGlobal) {
+            btnSendDeck.setText("Добавить к себе");
+        } else {
+            btnSendDeck.setText("Поделиться");
+        }
 
         btnTrainDeck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,12 +115,24 @@ public class DeckFragment extends Fragment {
                                 .show();
                     }
                 }
+                if(isGlobal) {
+                    NewDeck deck = new NewDeck(deckName);
+                    NewDecksBank.get().addDeck(deck);
+                    if(cardList != null) {
+                        cardList.forEach(s -> {
+                            s.setUserID(User.get().getId());
+                            NewCardsBank.get().addCard(s);
+                        });
+                    }
+                }
             }
         });
 
-        List<Card> cardList = new ArrayList<>();
+        cardList = new ArrayList<>();
         if(isGlobal) {
-            cardList = NewCardsBank.get().getGlobalCardsDeck();
+            List<Card> allGlobalCardUser = new ArrayList<>();
+            allGlobalCardUser = NewCardsBank.get().getGlobalCardsDeck();
+            cardList = allGlobalCardUser.stream().filter(s -> s.getDeckName().equals(deckName)).collect(Collectors.toList());
         } else {
             cardList = NewCardsBank.get().getCardsDeck(deckName);
         }

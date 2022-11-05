@@ -16,8 +16,8 @@
     <string name="btn_add">Добавить</string>
     <string name="btn_edit">Изменить</string>
     <string name="btn_cancel">Отмена</string>
-    <string name="create_card_et_word_hint">Введите термин или вопрос…</string>
-    <string name="create_card_et_value_hint">Введите значение или ответ…</string>
+    <string name="create_card_et_word_hint"></string>
+    <string name="create_card_et_value_hint"></string>
     <string name="attention">Внимание!</string>
     <string name="msgErrorCreateCard">Поля должны быть заполнены.</string>
     <string name="accept">Принято</string>
@@ -25,7 +25,7 @@
     <string name="addDeckSuccess">Колода успешно добавлена!</string>
     <string name="editCardSuccess">Карточка успешно обновлена!</string>
     <string name="slideshow_btn">Показать значение</string>
-    <string name="fragment_create_deck_et_hint">Введите название колоды…</string>
+    <string name="fragment_create_deck_et_hint">Введите название колоды:</string>
     <string name="item_card_delete_card">Удалить карточку</string>
     <string name="menu_card">Карточка</string>
     <string name="deck_content">Содержимое колоды</string>
@@ -36,5 +36,8 @@
     <string name="fragment_deck_btn_send_name">Поделиться</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_deck">Выберите колоду:</string>
+    <string name="value_or_answer">Значение или ответ:</string>
+    <string name="word_or_question">Слово, термин или вопрос:</string>
 
 </resources>

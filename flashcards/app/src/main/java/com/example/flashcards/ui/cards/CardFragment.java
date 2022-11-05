@@ -80,7 +80,7 @@ public class CardFragment extends DialogFragment {
                 cardName = word;
                 NewCardsBank.get().deleteCard(mCard);
                 Card card = new Card(word, value, deckName);
-                NewCardsBank.get().addCard(card, card.getDeckName());
+                NewCardsBank.get().addCard(card);
                 Toast msg = Toast.makeText(getActivity(), R.string.editCardSuccess, Toast.LENGTH_SHORT);
                 msg.show();
                 dismiss();

@@ -1,5 +1,6 @@
 package com.example.flashcards.ui.cards;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,17 @@ public class CreateCardDialog extends DialogFragment {
     private Button mBtnAdd;
     private String deckName;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if(dialog != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            dialog.getWindow().setLayout(width,height);
+        }
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -64,7 +76,7 @@ public class CreateCardDialog extends DialogFragment {
                 //CardsBank.get().addCard(card);
                 if(deckName != null) {
                     Card card1 = new Card(word, value, deckName);
-                    NewCardsBank.get().addCard(card1,deckName);
+                    NewCardsBank.get().addCard(card1);
 //                    Deck deck = new Deck(deckId, card.getId());
 //                    DecksBank.get().addDeck(deck);
                 }

@@ -8,6 +8,7 @@ import java.util.UUID;
 public class User {
     private static User user;
     private String id;
+    private String name;
 
     public static User get() {
         if(user == null) {
@@ -22,5 +23,21 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        User.user = user;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

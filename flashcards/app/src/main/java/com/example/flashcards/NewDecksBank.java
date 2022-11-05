@@ -33,6 +33,7 @@ public class NewDecksBank {
     private final String USER_ID;
     private final String TABLE_DECKS = "decks";
     private final String TABLE_GLOBAL_DECKS = "global_decks";
+    private String userName;
     private List<NewDeck> deckList;
     private List<NewDeck> deckGlobalList;
 
@@ -89,6 +90,7 @@ public class NewDecksBank {
 
     public void addDeck(NewDeck deck) {
         deckList.add(deck);
+
         db.collection(TABLE_USERS)
                 .document(USER_ID)
                 .collection(TABLE_DECKS)
@@ -112,5 +114,20 @@ public class NewDecksBank {
         deckGlobalList = new ArrayList<>();
         getAllDeck();
         loadGlobalDeck();
+    }
+
+    public void getUserNameById(String userId) {
+        db.collection(TABLE_USERS).document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    userName = task.getResult().get("user_name").toString();
+                }
+            }
+        });
+    }
+
+    public String getName() {
+        return userName;
     }
 }

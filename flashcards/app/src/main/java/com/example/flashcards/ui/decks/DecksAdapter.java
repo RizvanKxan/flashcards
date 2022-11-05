@@ -5,6 +5,7 @@ import static com.example.flashcards.ui.decks.DeckFragment.DECK_NAME;
 import static com.example.flashcards.ui.decks.DeckFragment.USER_ID;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,15 +60,19 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DecksHolder>
     public class DecksHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         Context context;
         private TextView mTitleTextView;
+        private TextView mTitleTextViewName;
         private ImageButton deleteDeck;
         private NewDeck deck;
         private String deckUserId;
+        CardView cardView;
 
         public DecksHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_card, parent, false));
             context = parent.getContext();
             itemView.setOnClickListener(this);
+            cardView = (CardView) itemView.findViewById(R.id.cardview);
             mTitleTextView = (TextView) itemView.findViewById(R.id.item_card_tv_name);
+            mTitleTextViewName = (TextView) itemView.findViewById(R.id.item_card_tv_user_name);
             deleteDeck = itemView.findViewById(R.id.itemDelete);
             deleteDeck.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,6 +93,8 @@ public class DecksAdapter extends RecyclerView.Adapter<DecksAdapter.DecksHolder>
             this.deck = decks;
             if(isGlobalMode) {
                 deckUserId = decks.getUserID();
+                mTitleTextViewName.setText(decks.getUserName());
+                cardView.setCardBackgroundColor(Color.GRAY);
             }
             mTitleTextView.setText(decks.getName());
         }

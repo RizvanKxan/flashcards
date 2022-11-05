@@ -100,7 +100,7 @@
     <fragment
         android:id="@+id/globalDecksFragment"
         android:name="com.example.flashcards.ui.decks.GlobalDecksFragment"
-        android:label="fragment_global_decks"
+        android:label="Глобальные колоды"
         tools:layout="@layout/fragment_global_decks" >
         <action
             android:id="@+id/action_globalDecksFragment_to_nav_deck"

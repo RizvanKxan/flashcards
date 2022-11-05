@@ -3,6 +3,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -10,15 +11,31 @@
     app:cardBackgroundColor="#068C9E"
     tools:layout_editor_absoluteX="1dp">
 
-    <TextView
-        android:id="@+id/item_card_tv_name"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:gravity="center"
-        android:minHeight="150dp"
-        android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_card_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center"
+            android:minHeight="150dp"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/item_card_tv_user_name"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:text=""/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <ImageButton
         android:id="@+id/itemDelete"
