@@ -39,5 +39,8 @@
     <string name="choose_deck">Выберите колоду:</string>
     <string name="value_or_answer">Значение или ответ:</string>
     <string name="word_or_question">Слово, термин или вопрос:</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="menu_user_page">Пользователь</string>
 
 </resources>

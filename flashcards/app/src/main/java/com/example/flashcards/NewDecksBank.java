@@ -98,6 +98,7 @@ public class NewDecksBank {
     }
 
     public void deleteDecks(NewDeck deck) {
+        deckList.remove(deck);
         db.collection(TABLE_USERS).document(USER_ID).collection(TABLE_DECKS).document(deck.getName()).delete();
     }
 

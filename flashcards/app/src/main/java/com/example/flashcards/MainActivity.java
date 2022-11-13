@@ -1,14 +1,19 @@
 package com.example.flashcards;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.flashcards.database.entity.Card;
 import com.example.flashcards.database.entity.FlashCard;
 import com.example.flashcards.database.entity.User;
+import com.example.flashcards.ui.user.UserPageDialog;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +43,6 @@ public class MainActivity extends AppCompatActivity{
 
     private static final int SIGN_IN_REQUEST_CODE = 0;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    List<Card> temp = new ArrayList<>();
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
@@ -178,6 +182,10 @@ public class MainActivity extends AppCompatActivity{
                             finish();
                         }
                     });
+        }
+        if(item.getItemId() == R.id.menu_account) {
+            UserPageDialog dialog = new UserPageDialog();
+            dialog.show(getSupportFragmentManager(),"USERPAGE");
         }
         return super.onOptionsItemSelected(item);
     }

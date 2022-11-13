@@ -106,6 +106,12 @@ public class DeckFragment extends Fragment {
                         NewDecksBank.get().deleteDecks(deck);
                         deck.isGlobal = true;
                         NewDecksBank.get().addDeck(deck);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle(R.string.attention)
+                                .setMessage("Вы успешно поделились колодой.")
+                                .setPositiveButton(R.string.accept, null)
+                                .create()
+                                .show();
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle(R.string.attention)
