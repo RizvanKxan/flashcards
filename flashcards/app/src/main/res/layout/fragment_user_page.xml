@@ -1,16 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
+    tools:context=".ui.user.UserPageFragment"
+    android:orientation="vertical">
 
-    <View
+    <TextView
+        android:id="@+id/user_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/yellow"/>
-    <Button
-        android:id="@+id/button2"
+        android:layout_height="wrap_content"
+        android:text="Имя:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@color/teal_200"
+        android:textAlignment="center"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/user_name_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="Leonid"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/user_card_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Количество карт:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:background="@color/teal_200"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/user_card_count_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/user_all_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Количество свайпов:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:background="@color/teal_200"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/user_all_swipe_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/user_swipe_know"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Свайпов <<Помню>>:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:background="@color/teal_200"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/user_swipe_know_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/user_swipe_dont_know"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Свайпов <<Не помню>>:"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:background="@color/teal_200"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/user_swipe_dont_know_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/user_clear_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_swipe"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:backgroundTint="#035461"
+        android:layout_gravity="center"/>
+</LinearLayout>

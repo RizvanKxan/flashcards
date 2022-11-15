@@ -1,19 +1,13 @@
 package com.example.flashcards;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.flashcards.database.entity.Card;
-import com.example.flashcards.database.entity.FlashCard;
 import com.example.flashcards.database.entity.User;
-import com.example.flashcards.ui.user.UserPageDialog;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,11 +25,6 @@ import com.example.flashcards.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity{
 
     public static final String TABLE_USERS = "users";
@@ -46,6 +35,9 @@ public class MainActivity extends AppCompatActivity{
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+
+    private SharedPreferences prefer;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +62,7 @@ public class MainActivity extends AppCompatActivity{
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_decks, R.id.nav_cards)
+                R.id.nav_home, R.id.nav_decks, R.id.nav_cards, R.id.nav_user)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -78,10 +70,31 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupWithNavController(navigationView, navController);
 
         checkAuth();
+        prefer = getSharedPreferences("user_data", MODE_PRIVATE);
+        editor = prefer.edit();
+        readSwipeInfo();
+    }
 
+    private void readSwipeInfo(){
+        try {
+            int allSwipe = prefer.getInt("all_swipe", 0);
+            User.get().setAllSwipe(allSwipe);
+            int knowSwipe = prefer.getInt("know", 0);
+            User.get().setKnowSwipe(knowSwipe);
+            int dontKnowSwipe = prefer.getInt("dont_know", 0);
+            User.get().setDontKnowSwipe(dontKnowSwipe);
+        } catch (Exception exception) {
+            //
+        }
 
     }
 
+    private void saveSwipeInfo(){
+        editor.putInt("all_swipe", User.get().getAllSwipe());
+        editor.putInt("know", User.get().getKnowSwipe());
+        editor.putInt("dont_know", User.get().getDontKnowSwipe());
+        editor.commit();
+    }
     private void checkAuth() {
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Запускаем активити регистрации или входа пользователя
@@ -135,6 +148,7 @@ public class MainActivity extends AppCompatActivity{
         super.onStart();
         NewDecksBank.get().openBank();
         NewCardsBank.get().openBank();
+        readSwipeInfo();
     }
 
     @Override
@@ -143,6 +157,7 @@ public class MainActivity extends AppCompatActivity{
         DecksBank.get().saveBank();
         NewDecksBank.get().openBank();
         CardsBank.get().saveBank();
+        saveSwipeInfo();
     }
 
     @Override
@@ -150,6 +165,7 @@ public class MainActivity extends AppCompatActivity{
         super.onStop();
         DecksBank.get().saveBank();
         CardsBank.get().saveBank();
+        saveSwipeInfo();
     }
 
     @Override
@@ -182,10 +198,6 @@ public class MainActivity extends AppCompatActivity{
                             finish();
                         }
                     });
-        }
-        if(item.getItemId() == R.id.menu_account) {
-            UserPageDialog dialog = new UserPageDialog();
-            dialog.show(getSupportFragmentManager(),"USERPAGE");
         }
         return super.onOptionsItemSelected(item);
     }

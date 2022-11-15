@@ -130,6 +130,12 @@ public class DeckFragment extends Fragment {
                             NewCardsBank.get().addCard(s);
                         });
                     }
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle(R.string.attention)
+                            .setMessage("Колода успешно добавлена.")
+                            .setPositiveButton(R.string.accept, null)
+                            .create()
+                            .show();
                 }
             }
         });

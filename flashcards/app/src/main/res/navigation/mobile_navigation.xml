@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_nav_home_to_globalDecksFragment"
             app:destination="@id/globalDecksFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_userPageFragment"
+            app:destination="@id/nav_user" />
     </fragment>
 
     <fragment
@@ -88,11 +91,6 @@
         tools:layout="@layout/fragment_create_deck" />
 
     <dialog
-        android:id="@+id/person_page"
-        android:name="com.example.flashcards.ui.user.UserPageDialog"
-        android:label="UserPageDialog"
-        tools:layout="@layout/fragment_user_page" />
-    <dialog
         android:id="@+id/nav_card_fragment"
         android:name="com.example.flashcards.ui.cards.CardFragment"
         android:label="@string/menu_card"
@@ -110,6 +108,11 @@
             android:id="@+id/action_globalDecksFragment_to_nav_deck"
             app:destination="@id/nav_deck" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_user"
+        android:name="com.example.flashcards.ui.user.UserPageFragment"
+        android:label="Личная страница"
+        tools:layout="@layout/fragment_user_page" />
 
 
 </navigation>

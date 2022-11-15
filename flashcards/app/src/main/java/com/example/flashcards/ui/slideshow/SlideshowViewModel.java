@@ -10,6 +10,7 @@ import com.example.flashcards.NewCardsBank;
 import com.example.flashcards.database.entity.Card;
 import com.example.flashcards.database.entity.Deck;
 import com.example.flashcards.database.entity.FlashCard;
+import com.example.flashcards.database.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,15 +44,35 @@ public class SlideshowViewModel extends ViewModel {
         return mText;
     }
 
-    public void swipe() {
+    public void swipe(String direction) {
         currentCardPosition = currentCardPosition + 1;
-        if (currentCardPosition < mCards.getValue().size()) {
-            mText.setValue(mCards.getValue().get(currentCardPosition).getWord());
-            isValueShown = false;
-        } else {
-            mText.setValue("Карточек больше нет.");
-        }
+        if (currentCardPosition <= mCards.getValue().size()) {
+            if(currentCardPosition < mCards.getValue().size()) {
+                mText.setValue(mCards.getValue().get(currentCardPosition).getWord());
+                isValueShown = false;
+            } else {
+                mText.setValue("Карточек больше нет.");
+            }
 
+            if(currentCardPosition == 0) {
+                return;
+            }
+
+            int allSwipe = User.get().getAllSwipe();
+            User.get().setAllSwipe(allSwipe + 1);
+
+            if(direction.equals("like")) {
+                int knowSwipe = User.get().getKnowSwipe();
+                User.get().setKnowSwipe(knowSwipe + 1);
+                return;
+            }
+            if(direction.equals("pass")) {
+                int dontKnowSwipe = User.get().getDontKnowSwipe();
+                User.get().setDontKnowSwipe(dontKnowSwipe + 1);
+                return;
+            }
+
+        }
     }
 
     public void getValue() {

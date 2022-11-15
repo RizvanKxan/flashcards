@@ -9,6 +9,9 @@ public class User {
     private static User user;
     private String id;
     private String name;
+    private int allSwipe;
+    private int knowSwipe;
+    private int dontKnowSwipe;
 
     public static User get() {
         if(user == null) {
@@ -39,5 +42,29 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAllSwipe() {
+        return allSwipe;
+    }
+
+    public void setAllSwipe(int allSwipe) {
+        this.allSwipe = allSwipe;
+    }
+
+    public int getKnowSwipe() {
+        return knowSwipe;
+    }
+
+    public void setKnowSwipe(int knowSwipe) {
+        this.knowSwipe = knowSwipe;
+    }
+
+    public int getDontKnowSwipe() {
+        return dontKnowSwipe;
+    }
+
+    public void setDontKnowSwipe(int dontKnowSwipe) {
+        this.dontKnowSwipe = dontKnowSwipe;
     }
 }

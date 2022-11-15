@@ -61,6 +61,12 @@ public class NewCardsBank {
         db.collection(TABLE_USERS).document(USER_ID).set(userName);
     }
 
+    public int getCountCard() {
+        if(cardsList != null) {
+            return cardsList.size();
+        }
+        return 0;
+    }
     public void getAllCard() {
         db.collection(TABLE_USERS).document(USER_ID).collection(TABLE_CARDS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

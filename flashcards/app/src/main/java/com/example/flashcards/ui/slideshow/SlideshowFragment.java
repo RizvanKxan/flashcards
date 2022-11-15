@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.flashcards.R;
+import com.example.flashcards.database.entity.User;
 import com.example.flashcards.databinding.FragmentSlideshowBinding;
 import com.example.flashcards.ui.home.HomeViewModel;
 
@@ -58,8 +59,11 @@ public class SlideshowFragment extends Fragment {
                 super.onTransitionCompleted(motionLayout, currentId);
 
                 if(currentId == R.id.offScreenPass || currentId == R.id.offScreenLike) {
-//                    motionLayout.setTransition(R.id.start, R.id.like);
-                    slideshowViewModel.swipe();
+                   if(currentId == R.id.offScreenLike) {
+                        slideshowViewModel.swipe("like");
+                        return;
+                    }
+                    slideshowViewModel.swipe("pass");
                 }
             }
         });
